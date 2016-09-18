@@ -1,104 +1,114 @@
 ﻿@model Manager.Models.Stats
 
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Level)
-        </dt>
+<div style="overflow: hidden; vertical-align:bottom;">
+    <div style="width: 95%; float: left;">
+        @Html.HiddenFor(model => model.ID, new { id = "StatsID" })
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Level)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Level)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Level)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EXP)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.EXP)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EXP)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.EXP)<span id="AddXP" class="fa-stack fa-lg" style="margin:-17px 0 0 0px;height: 20px;cursor:pointer;"><i class="fa fa-square-o fa-stack-1x" aria-hidden="true"></i><i class="fa fa-plus fa-stack-1x" aria-hidden="true"></i></span>
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Age)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Age)
+            </dd>
+        </dl>
+        <div style="column-count: 3; margin: 14px auto 20px auto">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Strength)
-        </dt>
+            @Html.Partial("CalcDetails", Model.CalculatedPartialModel)
 
-        <dd>
-            @Html.DisplayFor(model => model.Strength)
-        </dd>
+            <dl class="dl-horizontal" style="margin: 0 0 0 0">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vitality)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Strength)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Vitality)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Strength)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Constitution)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Vitality)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Constitution)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Vitality)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Dexterity)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Constitution)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Dexterity)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Constitution)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Accuracy)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dexterity)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Accuracy)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Dexterity)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Inteligence)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Accuracy)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Inteligence)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Accuracy)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Wisdom)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Inteligence)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Wisdom)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Inteligence)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Charisma)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Wisdom)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Charisma)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Wisdom)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Luck)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Charisma)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Luck)
-        </dd>
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.Charisma)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Luck)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Luck)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div id="edit-stats" class="btn" style="float:right; cursor:pointer; margin-top: 21.5%;">
+        <i class="fa fa-pencil-square-o" style="font-size:1.6em;" aria-hidden="true"></i>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
-</p>

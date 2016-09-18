@@ -1,0 +1,42 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "Add XP";
+}
+
+<h2>Add XP</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Stats</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2" for="XP">XP</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-number="The field XP must be a number." data-val-required="The XP field is required." id="X{}" name="XP" type="number" value="@(Model)">
+                <span class="field-validation-valid text-danger" data-valmsg-for="XP" data-valmsg-replace="true"></span>
+            </div>
+            <input type="hidden" id="id" name="id" value="@(ViewBag.ID)" />
+            <input type="hidden" id="player" name="player" value="@(ViewBag.Player)" />
+            <input type="hidden" id="username" value="@(ViewBag.Username)" />
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = ViewBag.Player, username = ViewBag.Username }, null)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -49,5 +49,8 @@ namespace Manager.Models
 
         [Required]
         public int Luck { get; set; }
+
+        [Display(AutoGenerateField = false)]
+        public CalcStats CalculatedPartialModel { get; set; }
     }
 }

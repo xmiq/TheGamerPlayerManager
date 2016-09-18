@@ -29,7 +29,7 @@ namespace Manager.Controllers
         {
             ViewBag.ID = id;
             ViewBag.Username = username;
-            return View();
+            return View(mgr.GetNextChapter(id));
         }
 
         // POST: Chapter/Create

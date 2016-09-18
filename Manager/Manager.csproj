@@ -159,6 +159,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CalcStats.cs" />
     <Compile Include="Models\Chapter.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Stats.cs" />
@@ -217,6 +218,9 @@
     <Content Include="Views\Chapter\Index.cshtml" />
     <Content Include="Views\Chapter\Create.cshtml" />
     <Content Include="Views\Stats\Details.cshtml" />
+    <Content Include="Views\Stats\CalcDetails.cshtml" />
+    <Content Include="Views\Stats\Edit.cshtml" />
+    <Content Include="Views\Stats\AddXP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,6 +25,20 @@ namespace Manager.DataManagement
                 .ToList();
         }
 
+        public Chapter GetNextChapter(int PlayerID)
+        {
+            var player = mgr.GetParameter();
+            player.ParameterName = "@Player";
+            player.Value = PlayerID;
+
+            return mgr.GetData("Player.usp_GetNextChapter", player)
+                .Select(x => new Chapter
+                {
+                    Number = Convert.ToInt32(x["Number"])
+                })
+                .FirstOrDefault();
+        }
+
         public void CreateChapter(Chapter c)
         {
             var player = mgr.GetParameter();
