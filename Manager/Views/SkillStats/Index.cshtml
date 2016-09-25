@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Manager.Models.SkillStats>
+
+<br />
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActiveDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassiveDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Level)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EXP)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActiveDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassiveDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td style="white-space:nowrap">
+                    @Html.DisplayFor(modelItem => item.EXP)<span id="AddSkillXP" class="fa-stack fa-lg" style="margin:-17px 0 0 0px;height: 20px;cursor:pointer;"><i class="fa fa-square-o fa-stack-1x" aria-hidden="true"></i><i class="fa fa-plus fa-stack-1x" aria-hidden="true"></i></span>
+                </td>
+                <td style="white-space:nowrap;">
+                    <input type="hidden" value="@(item.ID)" />
+                    <span id="EditSkillStat" class="fa fa-edit" style="cursor:pointer;"></span> |
+                    <span id="DeleteSkillStat" class="fa-stack fa-lg" style="cursor:pointer; font-size: 1.1em; margin-left: -8px;"><i class="fa fa-square-o fa-stack-1x" aria-hidden="true"></i><i class="fa fa-times fa-stack-1x" style="margin-left:4px; margin-top:-5px; text-shadow: -2px 2px #FFF" aria-hidden="true"></i></span>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No Skills Available</p>
+}
+<span id="AddSkillStat" class="fa-stack fa-lg" style="margin:-17px 0 0 0px;height: 20px;cursor:pointer;"><i class="fa fa-square-o fa-stack-1x" aria-hidden="true"></i><i class="fa fa-asterisk fa-stack-1x" style="margin-left:4px; margin-top:-5px; text-shadow: -2px 2px #FFF" aria-hidden="true"></i></span>

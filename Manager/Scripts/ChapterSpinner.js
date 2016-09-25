@@ -7,12 +7,29 @@
     output.children().remove();
 
     $.get("/Stats/Details/" + option.val(), function (data) {
-        output.append($("<div></div>").attr("id", "dvStats").html(data));
+        output.append($("<div></div>").attr("id", "dvStats").attr("style", "order: 1").html(data));
         $("#edit-stats").on("touch click", function () {
             window.location = "/Stats/Edit/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
         });
         $("#AddXP").on("touch click", function () {
             window.location = "/Stats/AddXP/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
+        });
+    })
+
+    $.get("/SkillStats/Index/" + option.val(), function (data) {
+        output.append($("<div></div>").attr("id", "dvSkills").attr("style", "order: 2").html(data));
+        $("#AddSkillStat").on("touch click", function () {
+            window.location = "/SkillStats/Create/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
+        });
+        $("#EditSkillStat").on("touch click", function () {
+            var id = $(this).parent().children("input").val();
+            window.location = "/SkillStats/Edit/" + id + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val() + "&chapter=" + option.val();
+        });
+        $("#DeleteSkillStat").on("touch click", function () {
+            window.location = "/SkillStats/Delete/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
+        });
+        $("#AddSkillXP").on("touch click", function () {
+            window.location = "/SkillStats/AddXP/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
         });
     })
 }

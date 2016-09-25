@@ -151,9 +151,12 @@
     <Compile Include="Controllers\ChapterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\SkillStatsController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="DataManagement\ChapterManager.cs" />
     <Compile Include="DataManagement\DataManager.cs" />
+    <Compile Include="DataManagement\SkillManager.cs" />
+    <Compile Include="DataManagement\SkillStatsManager.cs" />
     <Compile Include="DataManagement\StatsManager.cs" />
     <Compile Include="DataManagement\PlayerManager.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,7 +164,10 @@
     </Compile>
     <Compile Include="Models\CalcStats.cs" />
     <Compile Include="Models\Chapter.cs" />
+    <Compile Include="Models\enums.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Skill.cs" />
+    <Compile Include="Models\SkillStats.cs" />
     <Compile Include="Models\Stats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -221,6 +227,11 @@
     <Content Include="Views\Stats\CalcDetails.cshtml" />
     <Content Include="Views\Stats\Edit.cshtml" />
     <Content Include="Views\Stats\AddXP.cshtml" />
+    <Content Include="Views\SkillStats\Index.cshtml" />
+    <Content Include="Views\SkillStats\Edit.cshtml" />
+    <Content Include="Views\SkillStats\Delete.cshtml" />
+    <Content Include="Views\SkillStats\Create.cshtml" />
+    <Content Include="Views\SkillStats\AddXP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

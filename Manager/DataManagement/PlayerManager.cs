@@ -15,6 +15,7 @@ namespace Manager.DataManagement
             var username = mgr.GetParameter();
             username.ParameterName = "@Username";
             username.Value = playerUsername;
+            username.DbType = System.Data.DbType.String;
 
             return mgr.GetData("Player.usp_GetAllPlayers", username)
                 .Select(x => new Player
