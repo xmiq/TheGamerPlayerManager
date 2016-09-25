@@ -14,7 +14,7 @@
         $("#AddXP").on("touch click", function () {
             window.location = "/Stats/AddXP/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
         });
-    })
+    });
 
     $.get("/SkillStats/Index/" + option.val(), function (data) {
         output.append($("<div></div>").attr("id", "dvSkills").attr("style", "order: 2").html(data));
@@ -31,7 +31,7 @@
         $("#AddSkillXP").on("touch click", function () {
             window.location = "/SkillStats/AddXP/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
         });
-    })
+    });
 }
 
 $(document).ready(function () {
