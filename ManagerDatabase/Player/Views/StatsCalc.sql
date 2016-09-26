@@ -8,7 +8,7 @@ SELECT        ID, [Level], EXP, Age, Vitality * 100 AS HP, Inteligence * 10 AS M
                          Constitution * 1.2 * 0.25 AS [Damage Reduction], CAST(Dexterity - POWER(0.5, Dexterity) AS VARCHAR) + '%' AS Dodge, CAST(Dexterity - POWER(0.5, Dexterity) AS VARCHAR) + '%' AS Crit, 
                          CAST(Accuracy * 0.45 AS VARCHAR) + '%' AS [Hit Chance], Wisdom * 0.12 * 0.25 AS [Magic Resist], Charisma * 1.5 AS [Chance to Convince], Charisma * 1.5 AS [Lie is believed], Luck * 2.5 AS [Chance for loot], 
                          Luck * 2.5 AS [Better loot quality], Luck * 2.5 AS [Avoid overpowered enemies], Luck * 2.5 AS [Event goes well]
-FROM            Player.Status
+FROM            Player.Stats
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'Player', @level1type = N'VIEW', @level1name = N'StatsCalc';
 
