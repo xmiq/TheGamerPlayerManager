@@ -56,7 +56,7 @@ BEGIN
 
 	BEGIN TRY
 		/* Add Data */
-		INSERT INTO [Player].[SkillStatus]
+		INSERT INTO [Player].[SkillStats]
 		([SkillID], [Level], [Chapter], [EXP])
 		VALUES
 		(@SkillID, @Level, @Chapter, @EXP);

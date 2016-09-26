@@ -44,7 +44,7 @@ BEGIN
 
 	BEGIN TRY
 		/* Add Data */
-		INSERT INTO [aotxgmr].[Player].[Player]
+		INSERT INTO [Player].[Player]
 		([Name], [Surname], [Story], [User])
 		VALUES
 		(@Name, @Surname, @Story, @User);

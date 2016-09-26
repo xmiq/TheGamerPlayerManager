@@ -20,7 +20,7 @@ BEGIN
 		THROW 50000, @message, 1;
 	END
 
-	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM Player.SkillStatus WHERE ID = @SkillStatID)
+	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM Player.SkillStats WHERE ID = @SkillStatID)
 	BEGIN
 		SET @message = @message + '@SkillStatID: ' + @SkillStatID + ' is not a valid ID for this database';
 		THROW 50000, @message, 1;
@@ -29,7 +29,7 @@ BEGIN
 	BEGIN TRY
 		/* Get Data */
 		SELECT [SkillID], [Level], [Chapter], [EXP]
-		FROM Player.SkillStatus
+		FROM Player.SkillStats
 		WHERE ID = @SkillStatID;
 	END TRY
 	BEGIN CATCH

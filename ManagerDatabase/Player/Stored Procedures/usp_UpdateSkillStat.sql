@@ -35,7 +35,7 @@ BEGIN
 		THROW 50000, @message, 1;
 	END
 
-	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Player].[SkillStatus] WHERE ID = @ID)
+	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Player].[SkillStats] WHERE ID = @ID)
 	BEGIN
 		SET @message = @message + '@ID: ' + @ID + ' is not a valid skill stat id for this database';
 		THROW 50000, @message, 1;
@@ -43,7 +43,7 @@ BEGIN
 
 	BEGIN TRY
 		/* Update Data */
-		UPDATE       Player.SkillStatus
+		UPDATE       Player.SkillStats
 		SET          [Level] = @Level, [EXP] = @EXP
 		WHERE        ID = @ID
 	END TRY

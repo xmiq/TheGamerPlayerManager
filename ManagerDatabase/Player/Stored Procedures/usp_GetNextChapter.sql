@@ -1,6 +1,6 @@
 ﻿-- =============================================
 -- Author:		Jonathan Camilleri
--- Create date: 18 September 2016
+-- Create date: 18th September 2016
 -- Description:	Gets the next chapter in line
 -- =============================================
 CREATE PROCEDURE [Player].[usp_GetNextChapter]

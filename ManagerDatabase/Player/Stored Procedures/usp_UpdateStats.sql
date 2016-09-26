@@ -112,7 +112,7 @@ BEGIN
 		THROW 50000, @message, 1;
 	END
 
-	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM Player.[Status] WHERE ID = @ID)
+	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM Player.[Stats] WHERE ID = @ID)
 	BEGIN
 		SET @message = @message + 'Stat ID: ' + @ID + ' is not a valid stat for this database';
 		THROW 50000, @message, 1;
@@ -126,7 +126,7 @@ BEGIN
 
 	BEGIN TRY
 		/* Update Data */
-		UPDATE Player.[Status]
+		UPDATE Player.[Stats]
 		SET Chapter = @Chapter, [Level] = @Level, [EXP] = @EXP, Age = @Age, Strength = @Strength, Vitality = @Vitality, Constitution = @Constitution, Dexterity = @Dexterity, Accuracy = @Accuracy, Inteligence = @Inteligence, Wisdom = @Wisdom, Charisma = @Charisma, Luck = @Luck
 		WHERE (ID = @ID)
 	END TRY

@@ -21,7 +21,7 @@ BEGIN
 		THROW 50000, @message, 1;
 	END
 
-	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM Player.[Status] WHERE ID = @ID)
+	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM Player.[Stats] WHERE ID = @ID)
 	BEGIN
 		SET @message = @message + '@ID: ' + @ID + ' is not a valid ID for this database';
 		THROW 50000, @message, 1;
@@ -30,7 +30,7 @@ BEGIN
 	BEGIN TRY
 		/* Get Data */
 		SELECT [ID], [Level], [EXP], [Age], [HP], [MP], [HP Regen], [MP Regen], [Damage], [Lift / Move], [Damage Reduction], [Dodge], [Crit], [Hit Chance], [Magic Resist], [Chance to Convince], [Lie is believed], [Chance for loot], [Better loot quality], [Avoid overpowered enemies], [Event goes well]
-		FROM [aotxgmr].[Player].[StatsCalc]
+		FROM [Player].[StatsCalc]
 		WHERE ID = @ID
 	END TRY
 	BEGIN CATCH

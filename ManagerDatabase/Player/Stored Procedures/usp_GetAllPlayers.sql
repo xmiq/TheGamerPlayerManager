@@ -30,7 +30,7 @@ BEGIN
 	BEGIN TRY
 		/* Get Data */
 		SELECT [ID], [Name], [Surname], [Story]
-		FROM [aotxgmr].[Player].[Player]
+		FROM [Player].[Player]
 		WHERE [User] = @Username
 	END TRY
 	BEGIN CATCH

@@ -1,6 +1,6 @@
 ﻿-- =============================================
 -- Author:		Jonathan Camilleri
--- Create date: 26 September 2016
+-- Create date: 26th September 2016
 -- Description:	Gets the list of all skills
 -- =============================================
 CREATE PROCEDURE [Player].[usp_GetAllSkills]

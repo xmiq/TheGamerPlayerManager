@@ -40,7 +40,7 @@ BEGIN
 					+ CAST(@OtherCharLevel AS varchar) + ' AS [Level Difference] FROM [Player].[Status] WHERE Chapter = '
 					+ CAST (@Chapter AS varchar) + ') SELECT '
 					+ CAST(ID AS varchar) + ' AS ID, CEILING(' + [Active Formula] + ') AS [Active Formula] FROM [Player].[Status] s JOIN Stats st ON (s.ID = st.ID), Skill sk;')
-		FROM [aotxgmr].[Player].[Skills];
+		FROM [Player].[Skills];
 
 		INSERT INTO @activeFormula
 		EXEC (@SQL);
@@ -49,7 +49,7 @@ BEGIN
 
 		SELECT @SQL = CONCAT(@SQL, N'SELECT '
 					+ CAST(ID AS varchar) + ' AS ID, CEILING(' + [Active Cost Formula] + ') AS [Active Cost Formula] FROM [Player].[SkillStatus] s WHERE SkillID = ' + CAST(ID AS varchar) + ';')
-		FROM [aotxgmr].[Player].[Skills];
+		FROM [Player].[Skills];
 
 		INSERT INTO @activeCostFormula
 		EXEC (@SQL);
@@ -61,13 +61,13 @@ BEGIN
 					+ CAST (@Chapter AS varchar) + ') SELECT '
 					+ CAST(ID AS varchar) + ' AS ID, CEILING(' + [Passive Formula] + ') AS [Passive Formula] FROM [Player].[Status] s JOIN Stats st ON (s.ID = st.ID) JOIN Skill sk ON (sk.ID = '
 					+ CAST(ID AS varchar) + ');')
-		FROM [aotxgmr].[Player].[Skills];
+		FROM [Player].[Skills];
 
 		INSERT INTO @passiveFormula
 		EXEC (@SQL);
 
 		SELECT ss.[ID], s.[Name], s.[Description], s.[Type], REPLACE(REPLACE(s.[Active Description Formula], '[Formula]', af.[Active Formula]), '[Cost]', acf.[Active Cost Formula]) AS [Active Description], REPLACE(s.[Passive Description Formula], '[Formula]', pf.[Passive Formula]) AS [Passive Description], ss.[Level], ss.[EXP]
-		FROM [Player].[SkillStatus] ss
+		FROM [Player].[SkillStats] ss
 		JOIN [Player].[Skills] s ON (ss.SkillID = s.ID)
 		LEFT OUTER JOIN @activeFormula af ON (af.ID = s.ID)
 		LEFT OUTER JOIN @activeCostFormula acf ON (acf.ID = s.ID)

@@ -33,7 +33,7 @@ BEGIN
 		THROW 50000, @message, 1;
 	END
 
-	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM Player.[Status] WHERE ID = @ID)
+	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM Player.[Stats] WHERE ID = @ID)
 	BEGIN
 		SET @message = @message + 'There is no Status for the ID ' + @ID + ' in the database';
 		THROW 50000, @message, 1;
@@ -42,7 +42,7 @@ BEGIN
 	BEGIN TRY
 
 		/* Get Existing XP and Level */
-		SELECT @XP = [EXP], @Level = [Level] FROM Player.[Status] WHERE ID = @ID;
+		SELECT @XP = [EXP], @Level = [Level] FROM Player.[Stats] WHERE ID = @ID;
 
 		/* Add XP */
 		SET @TotalXP = @XP + @XPtoAdd;
@@ -76,7 +76,7 @@ BEGIN
 		END
 
 		/* Save Data */
-		UPDATE Player.[Status]
+		UPDATE Player.[Stats]
 		SET [EXP] = @TotalXP, [Level] = @Level
 		WHERE ID = @ID;
 

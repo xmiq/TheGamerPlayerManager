@@ -21,7 +21,7 @@ BEGIN
 		THROW 50000, @message, 1;
 	END
 
-	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Player].[SkillStatus] WHERE ID = @ID)
+	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Player].[SkillStats] WHERE ID = @ID)
 	BEGIN
 		SET @message = @message + '@ID: ' + @ID + ' is not a valid skill status for this database';
 		THROW 50000, @message, 1;
@@ -29,7 +29,7 @@ BEGIN
 
 	BEGIN TRY
 		/* Delete Data */
-		DELETE FROM  Player.SkillStatus
+		DELETE FROM  Player.SkillStats
 		WHERE        ID = @ID
 	END TRY
 	BEGIN CATCH

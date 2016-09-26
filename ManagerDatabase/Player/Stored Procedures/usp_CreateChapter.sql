@@ -40,7 +40,7 @@ BEGIN
 
 	BEGIN TRY
 		/* Insert Data */
-		INSERT INTO [aotxgmr].[Player].[Chapter]
+		INSERT INTO [Player].[Chapter]
 		(Player, Number)
 		OUTPUT
 		inserted.ID INTO @ChapterID
@@ -57,9 +57,9 @@ BEGIN
 		WHERE Player = @Player AND Number = @Number - 1
 
 		/* Insert stats with the values of the previous chapter */
-		INSERT INTO [Player].[Status] (Chapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck)
+		INSERT INTO [Player].[Stats] (Chapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck)
 		SELECT @CurrentChapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck
-		FROM [Player].[Status]
+		FROM [Player].[Stats]
 		WHERE (Chapter = @PreviousChapter)
 
 	END TRY

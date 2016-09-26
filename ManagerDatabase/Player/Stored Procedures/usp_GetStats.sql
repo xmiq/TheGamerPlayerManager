@@ -30,7 +30,7 @@ BEGIN
 	BEGIN TRY
 		/* Get Data */
 		SELECT [ID], [Level], [EXP], [Age], [Strength], [Vitality], [Constitution], [Dexterity], [Accuracy], [Inteligence], [Wisdom], [Charisma], [Luck]
-		FROM [aotxgmr].[Player].[Status]
+		FROM [Player].[Stats]
 		WHERE Chapter = @Chapter;
 	END TRY
 	BEGIN CATCH
