@@ -16,7 +16,8 @@ namespace Manager.DataManagement
                 .Select(x => new Skill
                 {
                     ID = Convert.ToInt32(x["ID"]),
-                    Name = x["Name"].ToString()
+                    Name = x["Name"].ToString(),
+                    Description = x["Description"].ToString()
                 })
                 .ToList();
         }
