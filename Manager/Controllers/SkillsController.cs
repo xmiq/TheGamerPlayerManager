@@ -1,4 +1,5 @@
 ﻿using Manager.DataManagement;
+using Manager.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,17 +54,16 @@ namespace Manager.Controllers
 
         // POST: Skills/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Skill s)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                mgr.UpdateSkill(s);
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(s);
             }
         }
 

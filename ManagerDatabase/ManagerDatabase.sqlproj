@@ -105,5 +105,6 @@
     <Build Include="Player\Sequences\SeqPlayer.sql" />
     <Build Include="Player\Sequences\SeqStats.sql" />
     <Build Include="Player\Stored Procedures\usp_GetSkill.sql" />
+    <Build Include="Player\Stored Procedures\usp_UpdateSkill.sql" />
   </ItemGroup>
 </Project>
