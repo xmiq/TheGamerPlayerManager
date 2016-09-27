@@ -1,0 +1,74 @@
+﻿@model Manager.Models.Skill
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Skill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActiveDescriptionFormula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActiveDescriptionFormula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassiveDescriptionFormula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassiveDescriptionFormula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActiveFormula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActiveFormula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActiveCostFormula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActiveCostFormula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassiveFormula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassiveFormula)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

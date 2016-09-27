@@ -20,7 +20,7 @@ namespace Manager.Controllers
         // GET: Skills/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(mgr.GetSkill(id));
         }
 
         // GET: Skills/Create
@@ -48,7 +48,7 @@ namespace Manager.Controllers
         // GET: Skills/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(mgr.GetSkill(id));
         }
 
         // POST: Skills/Edit/5
