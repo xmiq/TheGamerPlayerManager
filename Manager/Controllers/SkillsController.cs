@@ -78,9 +78,8 @@ namespace Manager.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                mgr.DeleteSkill(id);
+                return RedirectToAction(nameof(Index));
             }
             catch
             {

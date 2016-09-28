@@ -121,5 +121,14 @@ namespace Manager.DataManagement
 
             mgr.Execute("Player.usp_UpdateSkill", id, name, description, type, activeDescriptionFormula, passiveDescriptionFormula, activeFormula, activeCostFormula, passiveFormula);
         }
+
+        public void DeleteSkill(int ID)
+        {
+            var id = mgr.GetParameter();
+            id.ParameterName = "@ID";
+            id.Value = ID;
+
+            mgr.Execute("Player.usp_DeleteSkill", id);
+        }
     }
 }

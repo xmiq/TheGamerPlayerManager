@@ -107,5 +107,6 @@
     <Build Include="Player\Stored Procedures\usp_GetSkill.sql" />
     <Build Include="Player\Stored Procedures\usp_UpdateSkill.sql" />
     <Build Include="Player\Stored Procedures\usp_CreateSkill.sql" />
+    <Build Include="Player\Stored Procedures\usp_DeleteSkill.sql" />
   </ItemGroup>
 </Project>
