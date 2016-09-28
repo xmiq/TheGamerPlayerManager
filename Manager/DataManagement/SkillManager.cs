@@ -44,6 +44,43 @@ namespace Manager.DataManagement
                 .FirstOrDefault();
         }
 
+        public void CreateSkill(Skill s)
+        {
+            var name = mgr.GetParameter();
+            name.ParameterName = "@Name";
+            name.Value = s.Name;
+
+            var description = mgr.GetParameter();
+            description.ParameterName = "@Description";
+            description.Value = s.Description;
+
+            var type = mgr.GetParameter();
+            type.ParameterName = "@Type";
+            type.Value = (s.ActiveDescriptionFormula != null && s.PassiveDescriptionFormula == null) ? SkillType.Active : (s.ActiveDescriptionFormula == null && s.PassiveDescriptionFormula != null) ? SkillType.Passive : SkillType.Active | SkillType.Passive;
+
+            var activeDescriptionFormula = mgr.GetParameter();
+            activeDescriptionFormula.ParameterName = "@ActiveDescriptionFormula";
+            activeDescriptionFormula.Value = s.ActiveDescriptionFormula;
+
+            var passiveDescriptionFormula = mgr.GetParameter();
+            passiveDescriptionFormula.ParameterName = "@PassiveDescriptionFormula";
+            passiveDescriptionFormula.Value = s.PassiveDescriptionFormula;
+
+            var activeFormula = mgr.GetParameter();
+            activeFormula.ParameterName = "@ActiveFormula";
+            activeFormula.Value = s.ActiveFormula;
+
+            var activeCostFormula = mgr.GetParameter();
+            activeCostFormula.ParameterName = "@ActiveCostFormula";
+            activeCostFormula.Value = s.ActiveCostFormula;
+
+            var passiveFormula = mgr.GetParameter();
+            passiveFormula.ParameterName = "@PassiveFormula";
+            passiveFormula.Value = s.PassiveFormula;
+
+            mgr.Execute("Player.usp_CreateSkill", name, description, type, activeDescriptionFormula, passiveDescriptionFormula, activeFormula, activeCostFormula, passiveFormula);
+        }
+
         public void UpdateSkill(Skill s)
         {
             var id = mgr.GetParameter();

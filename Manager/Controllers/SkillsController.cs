@@ -32,13 +32,12 @@ namespace Manager.Controllers
 
         // POST: Skills/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Skill s)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                mgr.CreateSkill(s);
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -70,12 +69,12 @@ namespace Manager.Controllers
         // GET: Skills/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(mgr.GetSkill(id));
         }
 
         // POST: Skills/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Skill s)
         {
             try
             {
