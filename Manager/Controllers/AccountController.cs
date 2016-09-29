@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Manager.Controllers
 {
@@ -24,9 +25,24 @@ namespace Manager.Controllers
         {
             try
             {
-                mgr.Login(u);
-                //TODO: Fix Once Profile is Implemented
-                return RedirectToAction("");
+                var result = mgr.Login(u);
+                switch (result)
+                {
+                    case LoginResult.Success:
+                        FormsAuthentication.SetAuthCookie(u.Username, true);
+                        //TODO: Fix Once Profile is Implemented
+                        return RedirectToAction("");
+
+                    case LoginResult.Failed:
+                        ViewBag.Error = "Fail";
+                        return View(u);
+
+                    case LoginResult.Locked:
+                        ViewBag.Error = "Lock";
+                        return View(u);
+
+                    default: return View(u);
+                }
             }
             catch
             {

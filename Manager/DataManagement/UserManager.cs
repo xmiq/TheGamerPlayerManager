@@ -12,21 +12,30 @@ namespace Manager.DataManagement
     {
         private DataManager mgr = new DataManager();
 
-        public string GetSalt(string Username)
+        public void GetSalt(ref User u)
         {
             var username = mgr.GetParameter();
             username.ParameterName = "@username";
-            username.Value = Username;
+            username.Value = u.Username;
 
-            return mgr.Scalar("Login.usp_GetSalt", username).ToString();
+            u.Salt = mgr.Scalar("Login.usp_GetSalt", username).ToString();
         }
 
-        public bool Login(User u)
+        public LoginResult Login(User u)
         {
             SHA512Managed sha = new SHA512Managed();
-            string salt = GetSalt(u.Username);
-            string hashedPassword = Convert.ToBase64String(sha.ComputeHash(Encoding.Unicode.GetBytes(u.Username + salt + u.Password)));
-            return false;
+            GetSalt(ref u);
+            string hashedPassword = Convert.ToBase64String(sha.ComputeHash(Encoding.Unicode.GetBytes(u.Username + u.Salt + u.Password)));
+
+            var username = mgr.GetParameter();
+            username.ParameterName = "@Username";
+            username.Value = u.Username;
+
+            var password = mgr.GetParameter();
+            password.ParameterName = "@Password";
+            password.Value = hashedPassword;
+
+            return (LoginResult)mgr.Scalar("Login.usp_Login", username, password);
         }
     }
 }

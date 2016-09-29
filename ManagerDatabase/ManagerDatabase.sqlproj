@@ -110,5 +110,6 @@
     <Build Include="Player\Stored Procedures\usp_CreateSkill.sql" />
     <Build Include="Player\Stored Procedures\usp_DeleteSkill.sql" />
     <Build Include="Login\Stored Procedures\usp_GetSalt.sql" />
+    <Build Include="Login\Stored Procedures\usp_Login.sql" />
   </ItemGroup>
 </Project>
