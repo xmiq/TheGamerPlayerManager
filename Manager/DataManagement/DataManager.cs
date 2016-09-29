@@ -60,5 +60,24 @@ namespace Manager.DataManagement
                 conn.Close();
             }
         }
+
+        public object Scalar(string storedProcedureName, params IDataParameter[] Parameters)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = storedProcedureName;
+
+            cmd.Parameters.AddRange(Parameters);
+
+            try
+            {
+                conn.Open();
+                return cmd.ExecuteScalar();
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

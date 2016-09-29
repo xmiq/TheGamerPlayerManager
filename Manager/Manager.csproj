@@ -148,6 +148,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChapterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="DataManagement\SkillStatsManager.cs" />
     <Compile Include="DataManagement\StatsManager.cs" />
     <Compile Include="DataManagement\PlayerManager.cs" />
+    <Compile Include="DataManagement\UserManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -170,6 +172,7 @@
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\SkillStats.cs" />
     <Compile Include="Models\Stats.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +241,7 @@
     <Content Include="Views\Skills\Edit.cshtml" />
     <Content Include="Views\Skills\Create.cshtml" />
     <Content Include="Views\Skills\Delete.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

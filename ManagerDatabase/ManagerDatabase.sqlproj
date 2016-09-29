@@ -67,6 +67,7 @@
     <Folder Include="Player\Stored Procedures\" />
     <Folder Include="Security\" />
     <Folder Include="Player\Sequences\" />
+    <Folder Include="Login\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="PlayerDomain\Tables\SkillType.sql" />
@@ -108,5 +109,6 @@
     <Build Include="Player\Stored Procedures\usp_UpdateSkill.sql" />
     <Build Include="Player\Stored Procedures\usp_CreateSkill.sql" />
     <Build Include="Player\Stored Procedures\usp_DeleteSkill.sql" />
+    <Build Include="Login\Stored Procedures\usp_GetSalt.sql" />
   </ItemGroup>
 </Project>
