@@ -34,11 +34,8 @@ namespace Manager.Controllers
                         return RedirectToAction("");
 
                     case LoginResult.Failed:
-                        ViewBag.Error = "Fail";
-                        return View(u);
-
                     case LoginResult.Locked:
-                        ViewBag.Error = "Lock";
+                        ViewBag.Error = result;
                         return View(u);
 
                     default: return View(u);

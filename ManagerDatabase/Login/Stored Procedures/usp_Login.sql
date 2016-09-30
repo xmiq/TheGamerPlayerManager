@@ -36,11 +36,11 @@ BEGIN
 	BEGIN TRY
 		/* Check if account is locked */
 		/* Logic: Less than 3 tries, or 3 tries or more and 10 minutes have passed  */
-		IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Login].[User] WHERE Username = @Username AND (Tries < 3 OR (Tries >= 3 AND DATEADD(MINUTE, 10, LastTry) < SYSDATETIME())))
+		IF EXISTS (SELECT 1 AS RelatedRecords FROM [Login].[User] WHERE Username = @Username AND (Tries < 3 OR (Tries >= 3 AND DATEADD(MINUTE, 10, LastTry) < SYSDATETIME())))
 		BEGIN	
 
 			/* Try Login */
-			IF EXISTS (SELECT 1 AS RelatedRecords FROM [Login].[User] WHERE Username = @Username AND @Password = @Password)
+			IF EXISTS (SELECT 1 AS RelatedRecords FROM [Login].[User] WHERE Username = @Username AND [Password] = @Password)
 			BEGIN
 				/* Login Succeded! Reset Tries */
 				UPDATE [Login].[User]

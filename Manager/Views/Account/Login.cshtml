@@ -9,27 +9,43 @@
 @using (Html.BeginForm())
 {
 
-@Html.AntiForgeryToken()
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<table class="table">
-    <tr>
-        <td>@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" }) <span>:</span></td>
-        <td class="col-md-10">
-            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-        </td>
-    </tr>
-    <tr>
-        <td>@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" }) <span>:</span></td>
-        <td class="col-md-10">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </td>
-    </tr>
-    <tr>
-        <td><input type="submit" value="Login" class="btn btn-default" /></td>
-        <td><input type="reset" value="Reset" class="btn btn-default" /></td>
-    </tr>
-</table>
+    <table class="table">
+        <tr>
+            <td>@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" }) <span>:</span></td>
+            <td class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" }) <span>:</span></td>
+            <td class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Login" class="btn btn-default" /></td>
+            <td><input type="reset" value="Reset" class="btn btn-default" /></td>
+        </tr>
+    </table>
+    if (ViewBag.Error != null)
+    {
+        <br />
+        <br />
+        <div class="has-warning">
+
+            @switch ((Manager.Models.LoginResult)ViewBag.Error)
+            {
+                case Manager.Models.LoginResult.Failed: <p>Your username or password is incorrect. Please try again.</p>
+                    break;
+
+                case Manager.Models.LoginResult.Locked: <p>Your account is locked. Please wait 10 minutes</p>
+                    break;
+            }
+        </div>
+    }
 }
