@@ -46,5 +46,38 @@ namespace Manager.Controllers
                 return View(u);
             }
         }
+
+        //GET: Register
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        //POST: Register
+        [HttpPost]
+        public ActionResult Register(User u)
+        {
+            try
+            {
+                var result = mgr.Register(u);
+                switch (result)
+                {
+                    case LoginResult.Success:
+                        FormsAuthentication.SetAuthCookie(u.Username, true);
+                        //TODO: Fix Once Profile is Implemented
+                        return RedirectToAction("");
+
+                    case LoginResult.Failed:
+                        ViewBag.Error = result;
+                        return View(u);
+
+                    default: return View(u);
+                }
+            }
+            catch
+            {
+                return View(u);
+            }
+        }
     }
 }

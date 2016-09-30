@@ -25,5 +25,15 @@ namespace Manager.Models
 
         [Display(AutoGenerateField = false)]
         public string Salt { get; set; }
+
+        [Display(AutoGenerateField = false)]
+        public string HashedPassword
+        {
+            get
+            {
+                System.Security.Cryptography.SHA512Managed sha = new System.Security.Cryptography.SHA512Managed();
+                return Convert.ToBase64String(sha.ComputeHash(System.Text.Encoding.Unicode.GetBytes(Username + Salt + Password)));
+            }
+        }
     }
 }
