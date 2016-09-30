@@ -44,10 +44,12 @@ BEGIN
 			BEGIN
 				/* Login Succeded! Reset Tries */
 				UPDATE [Login].[User]
-				SET Tries = 0, LastTry = SYSDATETIME()
+				SET Tries = 0, LastTry = SYSDATETIME(), Token = NEWID()
 				WHERE Username = @Username;
 
-				SELECT 1;
+				SELECT 1 AS LoginResult, Token
+				FROM [Login].[User]
+				WHERE Username = @Username;
 			END
 			ELSE
 			BEGIN
@@ -56,12 +58,12 @@ BEGIN
 				SET Tries = Tries + 1, LastTry = SYSDATETIME()
 				WHERE Username = @Username;
 	
-				SELECT 0;
+				SELECT 0 AS LoginResult;
 			END
 		END
 		ELSE
 		BEGIN
-			SELECT -1;
+			SELECT -1 AS LoginResult;
 		END
 	END TRY
 	BEGIN CATCH

@@ -26,16 +26,15 @@ namespace Manager.Controllers
             try
             {
                 var result = mgr.Login(u);
-                switch (result)
+                switch (result.Result)
                 {
                     case LoginResult.Success:
-                        FormsAuthentication.SetAuthCookie(u.Username, true);
-                        //TODO: Fix Once Profile is Implemented
-                        return RedirectToAction("");
+                        FormsAuthentication.SetAuthCookie(result.Token.ToString(), true);
+                        return RedirectToAction(nameof(AccountProfile).Replace("Account", ""));
 
                     case LoginResult.Failed:
                     case LoginResult.Locked:
-                        ViewBag.Error = result;
+                        ViewBag.Error = result.Result;
                         return View(u);
 
                     default: return View(u);
@@ -45,6 +44,13 @@ namespace Manager.Controllers
             {
                 return View(u);
             }
+        }
+
+        //GET: Logoff
+        public ActionResult Logoff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("action");
         }
 
         //GET: Register
@@ -60,15 +66,14 @@ namespace Manager.Controllers
             try
             {
                 var result = mgr.Register(u);
-                switch (result)
+                switch (result.Result)
                 {
                     case LoginResult.Success:
-                        FormsAuthentication.SetAuthCookie(u.Username, true);
-                        //TODO: Fix Once Profile is Implemented
-                        return RedirectToAction("");
+                        FormsAuthentication.SetAuthCookie(result.Token.ToString(), true);
+                        return RedirectToAction(nameof(AccountProfile).Replace("Account", ""));
 
                     case LoginResult.Failed:
-                        ViewBag.Error = result;
+                        ViewBag.Error = result.Result;
                         return View(u);
 
                     default: return View(u);
@@ -78,6 +83,14 @@ namespace Manager.Controllers
             {
                 return View(u);
             }
+        }
+
+        //GET: Profile
+        [ActionName("Profile"), Authorize]
+        public ActionResult AccountProfile()
+        {
+            var Token = Guid.Parse(FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            return View(mgr.GetUser(Token));
         }
     }
 }

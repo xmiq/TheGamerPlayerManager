@@ -21,7 +21,7 @@ namespace Manager.DataManagement
             u.Salt = mgr.Scalar("Login.usp_GetSalt", username).ToString();
         }
 
-        public LoginResult Login(User u)
+        public UserLogin Login(User u)
         {
             GetSalt(ref u);
 
@@ -33,10 +33,16 @@ namespace Manager.DataManagement
             password.ParameterName = "@Password";
             password.Value = u.HashedPassword;
 
-            return (LoginResult)mgr.Scalar("Login.usp_Login", username, password);
+            return mgr.GetData("Login.usp_Login", username, password)
+                .Select(x => new UserLogin
+                {
+                    Token = (!x.IsDBNull("Token")) ? Guid.Parse(x["Token"].ToString()) : Guid.Empty,
+                    Result = (LoginResult)x["LoginResult"]
+                })
+                .FirstOrDefault();
         }
 
-        public LoginResult Register(User u)
+        public UserLogin Register(User u)
         {
             Random r = new Random();
             u.Salt = r.NextLong(max: 0xFFFFFFFFFF).ToString("x").PadLeft(10, '0');
@@ -65,7 +71,30 @@ namespace Manager.DataManagement
             salt.ParameterName = "@Salt";
             salt.Value = u.Salt;
 
-            return (LoginResult)mgr.Scalar("Login.usp_Register", username, name, surname, email, password, salt);
+            return mgr.GetData("Login.usp_Register", username, name, surname, email, password, salt)
+                .Select(x => new UserLogin
+                {
+                    Token = (!x.IsDBNull("Token")) ? Guid.Parse(x["Token"].ToString()) : Guid.Empty,
+                    Result = (LoginResult)x["LoginResult"]
+                })
+                .FirstOrDefault();
+        }
+
+        public User GetUser(Guid Token)
+        {
+            var token = mgr.GetParameter();
+            token.ParameterName = "@Token";
+            token.Value = Token;
+
+            return mgr.GetData("Login.usp_GetUserDetails", token)
+                .Select(x => new User
+                {
+                    Username = x["Username"].ToString(),
+                    Name = x["Name"].ToString(),
+                    Surname = x["Surname"].ToString(),
+                    Email = x["Email"].ToString()
+                })
+                .FirstOrDefault();
         }
     }
 
@@ -78,6 +107,12 @@ namespace Manager.DataManagement
             long longRand = BitConverter.ToInt64(buf, 0);
 
             return (Math.Abs(longRand % (max - min)) + min);
+        }
+
+        public static bool IsDBNull(this System.Data.IDataRecord record, string name)
+        {
+            int ordinal = record.GetOrdinal(name);
+            return record.IsDBNull(ordinal);
         }
     }
 }

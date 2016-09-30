@@ -112,5 +112,6 @@
     <Build Include="Login\Stored Procedures\usp_GetSalt.sql" />
     <Build Include="Login\Stored Procedures\usp_Login.sql" />
     <Build Include="Login\Stored Procedures\usp_Register.sql" />
+    <Build Include="Login\Stored Procedures\usp_GetUserDetails.sql" />
   </ItemGroup>
 </Project>
