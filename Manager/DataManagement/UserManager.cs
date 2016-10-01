@@ -31,7 +31,7 @@ namespace Manager.DataManagement
 
             var password = mgr.GetParameter();
             password.ParameterName = "@Password";
-            password.Value = u.HashedPassword;
+            password.Value = u.HashPassword();
 
             return mgr.GetData("Login.usp_Login", username, password)
                 .Select(x => new UserLogin
@@ -65,7 +65,7 @@ namespace Manager.DataManagement
 
             var password = mgr.GetParameter();
             password.ParameterName = "@Password";
-            password.Value = u.HashedPassword;
+            password.Value = u.HashPassword();
 
             var salt = mgr.GetParameter();
             salt.ParameterName = "@Salt";
@@ -95,6 +95,44 @@ namespace Manager.DataManagement
                     Email = x["Email"].ToString()
                 })
                 .FirstOrDefault();
+        }
+
+        public void UpateUser(Guid Token, User u)
+        {
+            var token = mgr.GetParameter();
+            token.ParameterName = "@Token";
+            token.Value = Token;
+
+            var name = mgr.GetParameter();
+            name.ParameterName = "@Name";
+            name.Value = u.Name;
+
+            var surname = mgr.GetParameter();
+            surname.ParameterName = "@Surname";
+            surname.Value = u.Surname;
+
+            var email = mgr.GetParameter();
+            email.ParameterName = "@Email";
+            email.Value = u.Email;
+
+            mgr.GetData("Login.usp_UpdateUserDetails", token, name, surname, email);
+        }
+
+        public void ChangePassword(Guid Token, Password CurrentPassword, Password NextPassword)
+        {
+            var token = mgr.GetParameter();
+            token.ParameterName = "@Token";
+            token.Value = Token;
+
+            var currentpassword = mgr.GetParameter();
+            currentpassword.ParameterName = "@OldPassword";
+            currentpassword.Value = CurrentPassword.Hash;
+
+            var nextpassword = mgr.GetParameter();
+            nextpassword.ParameterName = "@NewPassword";
+            nextpassword.Value = NextPassword.Hash;
+
+            mgr.GetData("Login.usp_UpdatePassword", token, currentpassword, nextpassword);
         }
     }
 

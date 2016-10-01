@@ -9,18 +9,20 @@ using System.Web.Security;
 
 namespace Manager.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private UserManager mgr = new UserManager();
 
         //GET: Login
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
 
         //POST: Login
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public ActionResult Login(User u)
         {
             try
@@ -50,17 +52,18 @@ namespace Manager.Controllers
         public ActionResult Logoff()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("action");
+            return RedirectToAction(nameof(Login));
         }
 
         //GET: Register
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
         //POST: Register
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public ActionResult Register(User u)
         {
             try
@@ -86,11 +89,67 @@ namespace Manager.Controllers
         }
 
         //GET: Profile
-        [ActionName("Profile"), Authorize]
+        [ActionName("Profile")]
         public ActionResult AccountProfile()
         {
             var Token = Guid.Parse(FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
             return View(mgr.GetUser(Token));
+        }
+
+        //GET: UpdateProfile
+        public ActionResult UpdateProfile()
+        {
+            var Token = Guid.Parse(FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+            return View(mgr.GetUser(Token));
+        }
+
+        //POST: UpdateProfile
+        [HttpPost]
+        public ActionResult UpdateProfile(User u)
+        {
+            try
+            {
+                var Token = Guid.Parse(FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+                mgr.UpateUser(Token, u);
+                return RedirectToAction(nameof(AccountProfile).Replace("Account", ""));
+            }
+            catch
+            {
+                return View(u);
+            }
+        }
+
+        //GET: ChangePassword
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        //POST: ChangePassword
+        [HttpPost]
+        public ActionResult ChangePassword(string oldPassword, string newPassword, string confrimPassword)
+        {
+            try
+            {
+                if (!newPassword.Equals(confrimPassword))
+                {
+                    ModelState.AddModelError("", "New Password and Confirm Password must be identical");
+                    return View();
+                }
+                else
+                {
+                    var Token = Guid.Parse(FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
+                    var user = mgr.GetUser(Token);
+                    mgr.ChangePassword(Token, new Password { User = user, Value = oldPassword }, new Password { User = user, Value = newPassword });
+                    return RedirectToAction(nameof(AccountProfile).Replace("Account", ""));
+                }
+            }
+            catch (Exception e)
+            {
+                if (e.Message.EndsWith("Password is invalid."))
+                    ModelState.AddModelError("", "Current Password is invalid");
+                return View();
+            }
         }
     }
 }

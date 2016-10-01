@@ -168,6 +168,7 @@
     <Compile Include="Models\CalcStats.cs" />
     <Compile Include="Models\Chapter.cs" />
     <Compile Include="Models\enums.cs" />
+    <Compile Include="Models\Password.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\SkillStats.cs" />
@@ -246,6 +247,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\UpdateProfile.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

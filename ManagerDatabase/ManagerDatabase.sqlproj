@@ -113,5 +113,7 @@
     <Build Include="Login\Stored Procedures\usp_Login.sql" />
     <Build Include="Login\Stored Procedures\usp_Register.sql" />
     <Build Include="Login\Stored Procedures\usp_GetUserDetails.sql" />
+    <Build Include="Login\Stored Procedures\usp_UpdateUserDetails.sql" />
+    <Build Include="Login\Stored Procedures\usp_UpdatePassword.sql" />
   </ItemGroup>
 </Project>

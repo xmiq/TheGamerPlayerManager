@@ -44,6 +44,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Update", "UpdateProfile") |
-    @Html.ActionLink("Change Password", "ChangePassword")
+    @Html.ActionLink("Update", nameof(Manager.Controllers.AccountController.UpdateProfile)) |
+    @Html.ActionLink("Change Password", nameof(Manager.Controllers.AccountController.ChangePassword)) |
+    @Html.ActionLink("View Players", nameof(Manager.Controllers.PlayerController.Index), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = Model.Username }, null)
 </p>
