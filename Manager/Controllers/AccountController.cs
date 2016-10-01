@@ -92,15 +92,13 @@ namespace Manager.Controllers
         [ActionName("Profile")]
         public ActionResult AccountProfile()
         {
-            var Token = Guid.Parse(FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
-            return View(mgr.GetUser(Token));
+            return View(mgr.GetUser(Token.Value));
         }
 
         //GET: UpdateProfile
         public ActionResult UpdateProfile()
         {
-            var Token = Guid.Parse(FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
-            return View(mgr.GetUser(Token));
+            return View(mgr.GetUser(Token.Value));
         }
 
         //POST: UpdateProfile
@@ -109,8 +107,7 @@ namespace Manager.Controllers
         {
             try
             {
-                var Token = Guid.Parse(FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
-                mgr.UpateUser(Token, u);
+                mgr.UpateUser(Token.Value, u);
                 return RedirectToAction(nameof(AccountProfile).Replace("Account", ""));
             }
             catch
@@ -138,9 +135,8 @@ namespace Manager.Controllers
                 }
                 else
                 {
-                    var Token = Guid.Parse(FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name);
-                    var user = mgr.GetUser(Token);
-                    mgr.ChangePassword(Token, new Password { User = user, Value = oldPassword }, new Password { User = user, Value = newPassword });
+                    var user = mgr.GetUser(Token.Value);
+                    mgr.ChangePassword(Token.Value, new Password { User = user, Value = oldPassword }, new Password { User = user, Value = newPassword });
                     return RedirectToAction(nameof(AccountProfile).Replace("Account", ""));
                 }
             }

@@ -42,8 +42,11 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID, username = ViewBag.Username }) |
-    @Html.ActionLink("Back to List", "Index", new { id = ViewBag.Username })
+    @if (ViewBag.IsOwner)
+    {
+        @Html.ActionLink("Edit", nameof(Manager.Controllers.PlayerController.Edit), new { id = Model.ID, username = ViewBag.Username }) <span> |</span>
+    }
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Index), new { id = ViewBag.Username })
 </p>
 
 <hr />

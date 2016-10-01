@@ -6,9 +6,12 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create", new { id = ViewBag.Username })
-</p>
+@if (ViewBag.IsOwner)
+{
+    <p>
+        @Html.ActionLink("Create New", nameof(Manager.Controllers.PlayerController.Create), new { id = ViewBag.Username })
+    </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -36,10 +39,22 @@
                 @Html.DisplayFor(modelItem => item.Story)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID, username = ViewBag.Username }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID, username = ViewBag.Username }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID, username = ViewBag.Username })
+                @if (ViewBag.IsOwner)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID, username = ViewBag.Username }) <span> |</span>
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.ID, username = ViewBag.Username })
+                @if (ViewBag.IsOwner)
+                {
+                    <span> |</span> @Html.ActionLink("Delete", "Delete", new { id = item.ID, username = ViewBag.Username })
+                }
             </td>
         </tr>
     }
 </table>
+@if (ViewBag.IsOwner)
+{
+    <p>
+        @Html.ActionLink("Back to Profile", nameof(Manager.Controllers.AccountController.AccountProfile).Replace("Account", ""), nameof(Manager.Controllers.AccountController).Replace("Controller", ""))
+    </p>
+}

@@ -43,7 +43,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index", new { id = ViewBag.Username })
+            @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Index), new { id = ViewBag.Username })
         </div>
     }
 </div>

@@ -134,6 +134,19 @@ namespace Manager.DataManagement
 
             mgr.GetData("Login.usp_UpdatePassword", token, currentpassword, nextpassword);
         }
+
+        public bool IsOwner(Guid Token, string Username)
+        {
+            var token = mgr.GetParameter();
+            token.ParameterName = "@Token";
+            token.Value = Token;
+
+            var username = mgr.GetParameter();
+            username.ParameterName = "@Username";
+            username.Value = Username;
+
+            return Convert.ToBoolean(mgr.Scalar("Login.usp_IsOwner", token, username));
+        }
     }
 
     public static class Extensions
