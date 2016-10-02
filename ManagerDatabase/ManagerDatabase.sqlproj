@@ -116,5 +116,7 @@
     <Build Include="Login\Stored Procedures\usp_UpdateUserDetails.sql" />
     <Build Include="Login\Stored Procedures\usp_UpdatePassword.sql" />
     <Build Include="Login\Stored Procedures\usp_IsOwner.sql" />
+    <Build Include="Player\Tables\Story.sql" />
+    <Build Include="Player\Sequences\SeqStory.sql" />
   </ItemGroup>
 </Project>
