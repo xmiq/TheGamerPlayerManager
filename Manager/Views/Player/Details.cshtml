@@ -5,6 +5,9 @@
 }
 
 @section js{
+    <script>
+        var IsOwner = @(ViewBag.IsOwner.ToString().ToLower());
+    </script>
     <script src="~/Scripts/ChapterSpinner.js"></script>
 }
 
@@ -51,7 +54,7 @@
 
 <hr />
 
-@Html.Action(nameof(Manager.Controllers.ChapterController.Index), nameof(Manager.Controllers.ChapterController).Replace("Controller", ""), new { id = Model.ID })
+@Html.Action(nameof(Manager.Controllers.ChapterController.Index), nameof(Manager.Controllers.ChapterController).Replace("Controller", ""), new { id = Model.ID, username = ViewBag.Username })
 
 <br />
 

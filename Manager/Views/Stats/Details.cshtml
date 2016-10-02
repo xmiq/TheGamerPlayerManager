@@ -17,7 +17,8 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.EXP)<span id="AddXP" class="fa-stack fa-lg" style="margin:-17px 0 0 0px;height: 20px;cursor:pointer;"><i class="fa fa-square-o fa-stack-1x" aria-hidden="true"></i><i class="fa fa-plus fa-stack-1x" aria-hidden="true"></i></span>
+                @Html.DisplayFor(model => model.EXP)@if (ViewBag.IsOwner)
+                {<span id="AddXP" class="fa-stack fa-lg" style="margin:-17px 0 0 0px;height: 20px;cursor:pointer;"><i class="fa fa-square-o fa-stack-1x" aria-hidden="true"></i><i class="fa fa-plus fa-stack-1x" aria-hidden="true"></i></span>}
             </dd>
 
             <dt>
@@ -108,7 +109,10 @@
             </dl>
         </div>
     </div>
-    <div id="edit-stats" class="btn" style="float:right; cursor:pointer; margin-top: 21.5%;">
-        <i class="fa fa-pencil-square-o" style="font-size:1.6em;" aria-hidden="true"></i>
-    </div>
+    @if (ViewBag.IsOwner)
+    {
+        <div id="edit-stats" class="btn" style="float:right; cursor:pointer; margin-top: 21.5%;">
+            <i class="fa fa-pencil-square-o" style="font-size:1.6em;" aria-hidden="true"></i>
+        </div>
+    }
 </div>

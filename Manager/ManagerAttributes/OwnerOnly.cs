@@ -22,6 +22,12 @@ namespace Manager.ManagerAttributes
 
             string username = (rd.Values.ContainsKey("username")) ? rd.Values["username"].ToString() : rd.Values["id"].ToString();
 
+            //Sometimes username is not recognized in RouteData
+            if (username.All(x => Char.IsNumber(x)))
+            {
+                username = httpContext.Request.Params["username"].ToString();
+            }
+
             UserManager mgr = new UserManager();
 
             return mgr.IsOwner(Token.Value, username);

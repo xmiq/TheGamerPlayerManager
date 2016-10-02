@@ -2,8 +2,11 @@
 
 <div>
     <div id="chapter-previous" class="btn" style="float:left;"><i class="glyphicon glyphicon-chevron-left"></i></div>
-    <div id="chapter-new" class="btn" style="float:right; cursor:pointer;"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-asterisk"></span></div>
-    <div style="float:right; width: 10px; text-align:center; padding: 6px 12px;">|</div>
+    @if (ViewBag.IsOwner)
+    {
+        <div id="chapter-new" class="btn" style="float:right; cursor:pointer;"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-asterisk"></span></div>
+        <div style="float:right; width: 10px; text-align:center; padding: 6px 12px;">|</div>
+    }
     <div id="chapter-next" class="btn" style="float:right; cursor:pointer;"><i class="glyphicon glyphicon-chevron-right"></i></div>
     <div style="width: 100px; margin: 0 auto; padding:6px 12px;">
         <select id="chapter-select" style="display:none;">

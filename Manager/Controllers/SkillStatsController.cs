@@ -1,4 +1,5 @@
 ﻿using Manager.DataManagement;
+using Manager.ManagerAttributes;
 using Manager.Models;
 using System;
 using System.Collections.Generic;
@@ -8,18 +9,22 @@ using System.Web.Mvc;
 
 namespace Manager.Controllers
 {
+    [OwnerOnly]
     public class SkillStatsController : Controller
     {
         private SkillStatsManager mgr = new SkillStatsManager();
         private SkillManager skmgr = new SkillManager();
+        private UserManager umgr = new UserManager();
 
-        // GET: Skills
-        public ActionResult Index(int id)
+        // GET: Skills/5?username=myUser
+        [AllowAnonymous]
+        public ActionResult Index(int id, string username)
         {
+            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? umgr.IsOwner(Token.Value, username) : false;
             return PartialView(mgr.GetSkillStats(id));
         }
 
-        // GET: Skills/Create
+        // GET: Skills/Create?username=myUser&player=5
         public ActionResult Create(int id, string username, int player)
         {
             ViewBag.Username = username;
@@ -28,7 +33,7 @@ namespace Manager.Controllers
             return View(new SkillStats { Chapter = new Chapter { ID = id }, Level = 1, EXP = 0 });
         }
 
-        // POST: Skills/Create
+        // POST: Skills/Create?username=myUser&player=5
         [HttpPost]
         public ActionResult Create(string username, int player, SkillStats ss)
         {
@@ -47,7 +52,7 @@ namespace Manager.Controllers
             }
         }
 
-        // GET: Skills/Edit/5
+        // GET: Skills/Edit/5?username=myUser&player=5
         public ActionResult Edit(int id, int player, string username)
         {
             ViewBag.Player = player;
@@ -55,7 +60,7 @@ namespace Manager.Controllers
             return View(mgr.GetSkillStat(id));
         }
 
-        // POST: Skills/Edit/5
+        // POST: Skills/Edit/5?username=myUser&player=5
         [HttpPost]
         public ActionResult Edit(int id, int player, string username, SkillStats ss)
         {
@@ -73,7 +78,7 @@ namespace Manager.Controllers
             }
         }
 
-        // GET: Skills/Delete/5
+        // GET: Skills/Delete/5?username=myUser&player=5
         public ActionResult Delete(int id, int player, string username)
         {
             ViewBag.Player = player;
@@ -81,7 +86,7 @@ namespace Manager.Controllers
             return View(mgr.GetSkillStat(id));
         }
 
-        // POST: Skills/Delete/5
+        // POST: Skills/Delete/5?username=myUser&player=5
         [HttpPost]
         public ActionResult Delete(int id, int player, string username, SkillStats ss)
         {
@@ -99,7 +104,7 @@ namespace Manager.Controllers
             }
         }
 
-        // GET: Stats/AddXP/5
+        // GET: Stats/AddXP/5?username=myUser&player=5
         public ActionResult AddXP(int id, int player, string username)
         {
             ViewBag.Player = player;
@@ -108,7 +113,7 @@ namespace Manager.Controllers
             return View(0);
         }
 
-        // POST: Stats/AddXP/5
+        // POST: Stats/AddXP/5?username=myUser&player=5
         [HttpPost]
         public ActionResult AddXP(int id, int player, string username, int XP)
         {

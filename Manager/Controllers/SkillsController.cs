@@ -1,4 +1,5 @@
 ﻿using Manager.DataManagement;
+using Manager.ManagerAttributes;
 using Manager.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Manager.Controllers
 {
+    [OwnerOnly]
     public class SkillsController : Controller
     {
         private SkillManager mgr = new SkillManager();

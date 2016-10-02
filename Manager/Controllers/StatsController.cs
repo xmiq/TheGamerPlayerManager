@@ -1,4 +1,5 @@
 ﻿using Manager.DataManagement;
+using Manager.ManagerAttributes;
 using Manager.Models;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,21 @@ using System.Web.Mvc;
 
 namespace Manager.Controllers
 {
+    [OwnerOnly]
     public class StatsController : Controller
     {
         private StatsManager mgr = new StatsManager();
+        private UserManager umgr = new UserManager();
 
-        // GET: Stats/Details/5
-        public ActionResult Details(int id)
+        // GET: Stats/Details/5?username=myUser
+        [AllowAnonymous]
+        public ActionResult Details(int id, string username)
         {
+            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? umgr.IsOwner(Token.Value, username) : false;
             return PartialView(mgr.GetStats(id));
         }
 
-        // GET: Stats/Edit/5
+        // GET: Stats/Edit/5?player=5&username=myUser
         public ActionResult Edit(int id, int player, string username)
         {
             ViewBag.Player = player;
@@ -26,7 +31,7 @@ namespace Manager.Controllers
             return View(mgr.GetStats(id));
         }
 
-        // POST: Stats/Edit/5
+        // POST: Stats/Edit/5?player=5&username=myUser
         [HttpPost]
         public ActionResult Edit(int id, int player, string username, Stats s)
         {
@@ -43,7 +48,7 @@ namespace Manager.Controllers
             }
         }
 
-        // GET: Stats/AddXP/5
+        // GET: Stats/AddXP/5?player=5&username=myUser
         public ActionResult AddXP(int id, int player, string username)
         {
             ViewBag.Player = player;
@@ -52,7 +57,7 @@ namespace Manager.Controllers
             return View(0);
         }
 
-        // POST: Stats/AddXP/5
+        // POST: Stats/AddXP/5?player=5&username=myUser
         [HttpPost]
         public ActionResult AddXP(int id, int player, string username, int XP)
         {

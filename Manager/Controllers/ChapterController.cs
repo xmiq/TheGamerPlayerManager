@@ -1,4 +1,5 @@
 ﻿using Manager.DataManagement;
+using Manager.ManagerAttributes;
 using Manager.Models;
 using System;
 using System.Collections.Generic;
@@ -8,23 +9,21 @@ using System.Web.Mvc;
 
 namespace Manager.Controllers
 {
+    [OwnerOnly]
     public class ChapterController : Controller
     {
         private ChapterManager mgr = new ChapterManager();
+        private UserManager umgr = new UserManager();
 
-        // GET: Chapter
-        public ActionResult Index(int id)
+        // GET: Chapter/5?username=MyUser
+        [AllowAnonymous]
+        public ActionResult Index(int id, string username)
         {
+            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? umgr.IsOwner(Token.Value, username) : false;
             return PartialView(mgr.GetAllChapters(id));
         }
 
-        // GET: Chapter/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Chapter/Create
+        // GET: Chapter/Create/5?username=MyUser
         public ActionResult Create(int id, string username)
         {
             ViewBag.ID = id;
