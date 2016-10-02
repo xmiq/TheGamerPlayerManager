@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Manager.Controllers
 {
-    [OwnerOnly]
+    [Authorize]
     public class SkillsController : Controller
     {
         private SkillManager mgr = new SkillManager();
