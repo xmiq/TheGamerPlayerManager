@@ -22,14 +22,18 @@ namespace Manager.DataManagement
                 .ToList();
         }
 
-        public List<Skill> GetAllSkills(string username)
+        public List<Story> GetAllStories(string Username)
         {
-            return mgr.GetData("Player.usp_GetAllSkills")
-                .Select(x => new Skill
+            var username = mgr.GetParameter();
+            username.ParameterName = "@Username";
+            username.Value = Username;
+
+            return mgr.GetData("Player.usp_GetAllMyStories", username)
+                .Select(x => new Story
                 {
                     ID = Convert.ToInt32(x["ID"]),
                     Name = x["Name"].ToString(),
-                    Description = x["Description"].ToString()
+                    User = new User { Username = Username }
                 })
                 .ToList();
         }
