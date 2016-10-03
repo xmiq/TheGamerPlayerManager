@@ -59,11 +59,7 @@ namespace Manager.DataManagement
             story.ParameterName = "@Story";
             story.Value = p.Story;
 
-            var user = mgr.GetParameter();
-            user.ParameterName = "@User";
-            user.Value = username;
-
-            mgr.Execute("Player.usp_CreatePlayer", name, surname, story, user);
+            mgr.Execute("Player.usp_CreatePlayer", name, surname, story);
         }
 
         public void UpdatePlayer(string username, Player p)
@@ -84,11 +80,7 @@ namespace Manager.DataManagement
             story.ParameterName = "@Story";
             story.Value = p.Story;
 
-            var user = mgr.GetParameter();
-            user.ParameterName = "@User";
-            user.Value = username;
-
-            mgr.Execute("Player.usp_UpdatePlayer", id, name, surname, story, user);
+            mgr.Execute("Player.usp_UpdatePlayer", id, name, surname, story);
         }
 
         public void DeletePlayer(Player p)

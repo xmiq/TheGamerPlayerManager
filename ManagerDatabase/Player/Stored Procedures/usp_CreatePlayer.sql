@@ -7,8 +7,7 @@ CREATE PROCEDURE [Player].[usp_CreatePlayer]
 	-- Add the parameters for the stored procedure here
 	@Name varchar(25),
 	@Surname varchar(25),
-	@Story varchar(100),
-	@User varchar(20)
+	@Story int
 AS
 BEGIN
 	/* SET NOCOUNT ON added to prevent extra result sets from interfering with SELECT statements. */
@@ -30,24 +29,24 @@ BEGIN
 		THROW 50000, @message, 1;
 	END
 
-	IF @Story IS NULL OR @Story = ''
+	IF @Story IS NULL OR @Story = 0
 	BEGIN
 		SET @message = @message + '@Story cannot be empty';
 		THROW 50000, @message, 1;
 	END
 
-	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Login].[User] WHERE Username = @User)
+	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Player].[Story] WHERE ID = @Story)
 	BEGIN
-		SET @message = @message + '@User: ' + @User + ' is not a valid username for this database';
+		SET @message = @message + '@Story: ' + @Story + ' is not a valid story for this database';
 		THROW 50000, @message, 1;
 	END
 
 	BEGIN TRY
 		/* Add Data */
 		INSERT INTO [Player].[Player]
-		([Name], [Surname], [Story], [User])
+		([Name], [Surname], [Story])
 		VALUES
-		(@Name, @Surname, @Story, @User);
+		(@Name, @Surname, @Story);
 	END TRY
 	BEGIN CATCH
 	  -- Implement Error Catching

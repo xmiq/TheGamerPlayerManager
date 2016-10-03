@@ -29,9 +29,10 @@ BEGIN
 
 	BEGIN TRY
 		/* Get Data */
-		SELECT [ID], [Name], [Surname], [Story]
-		FROM [Player].[Player]
-		WHERE ID = @ID;
+		SELECT p.[ID], p.[Name], p.[Surname], s.[Name] AS [Story]
+		FROM [Player].[Player] p
+		JOIN [Player].[Story] s on (s.ID = p.Story)
+		WHERE p.ID = @ID;
 	END TRY
 	BEGIN CATCH
 	  -- Implement Error Catching

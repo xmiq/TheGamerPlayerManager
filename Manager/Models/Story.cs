@@ -2,22 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace Manager.Models
 {
-    public class Player
+    public class Story
     {
         [Key]
         public int ID { get; set; }
 
-        [Required, MaxLength(25)]
+        [Required, MaxLength(100)]
         public string Name { get; set; }
 
-        [Required, MaxLength(25)]
-        public string Surname { get; set; }
-
         [Required]
-        public Story Story { get; set; }
+        public User User { get; set; }
     }
 }

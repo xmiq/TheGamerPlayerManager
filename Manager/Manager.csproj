@@ -155,6 +155,7 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\SkillStatsController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
+    <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="DataManagement\ChapterManager.cs" />
     <Compile Include="DataManagement\DataManager.cs" />
     <Compile Include="DataManagement\SkillManager.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\SkillStats.cs" />
     <Compile Include="Models\Stats.cs" />
+    <Compile Include="Models\Story.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserLogin.cs" />
@@ -252,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Story\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
