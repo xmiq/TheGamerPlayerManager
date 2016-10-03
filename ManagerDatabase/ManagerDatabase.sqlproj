@@ -118,5 +118,6 @@
     <Build Include="Login\Stored Procedures\usp_IsOwner.sql" />
     <Build Include="Player\Tables\Story.sql" />
     <Build Include="Player\Sequences\SeqStory.sql" />
+    <Build Include="Player\Stored Procedures\usp_GetAllStories.sql" />
   </ItemGroup>
 </Project>

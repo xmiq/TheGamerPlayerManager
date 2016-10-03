@@ -158,6 +158,7 @@
     <Compile Include="Controllers\StoryController.cs" />
     <Compile Include="DataManagement\ChapterManager.cs" />
     <Compile Include="DataManagement\DataManager.cs" />
+    <Compile Include="DataManagement\StoryManager.cs" />
     <Compile Include="DataManagement\SkillManager.cs" />
     <Compile Include="DataManagement\SkillStatsManager.cs" />
     <Compile Include="DataManagement\StatsManager.cs" />
