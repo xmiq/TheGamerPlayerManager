@@ -38,24 +38,18 @@ namespace Manager.DataManagement
                 .ToList();
         }
 
-        public Skill GetSkill(int ID)
+        public Story GetStory(int ID)
         {
             var id = mgr.GetParameter();
             id.ParameterName = "@ID";
             id.Value = ID;
 
-            return mgr.GetData("Player.usp_GetSkill", id)
-                .Select(x => new Skill
+            return mgr.GetData("Player.usp_GetStory", id)
+                .Select(x => new Story
                 {
                     ID = Convert.ToInt32(x["ID"]),
                     Name = x["Name"].ToString(),
-                    Description = x["Description"].ToString(),
-                    Type = (SkillType)Convert.ToInt32(x["Type"]),
-                    ActiveDescriptionFormula = x["Active Description Formula"].ToString(),
-                    PassiveDescriptionFormula = x["Passive Description Formula"].ToString(),
-                    ActiveFormula = x["Active Formula"].ToString(),
-                    ActiveCostFormula = x["Active Cost Formula"].ToString(),
-                    PassiveFormula = x["Passive Formula"].ToString()
+                    User = new User { Username = x["User"].ToString() }
                 })
                 .FirstOrDefault();
         }

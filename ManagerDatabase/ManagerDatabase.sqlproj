@@ -120,5 +120,6 @@
     <Build Include="Player\Sequences\SeqStory.sql" />
     <Build Include="Player\Stored Procedures\usp_GetAllStories.sql" />
     <Build Include="Player\Stored Procedures\usp_GetAllMyStories.sql" />
+    <Build Include="Player\Stored Procedures\usp_GetStory.sql" />
   </ItemGroup>
 </Project>
