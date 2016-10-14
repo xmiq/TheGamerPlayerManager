@@ -29,7 +29,7 @@ BEGIN
 
 	BEGIN TRY
 		/* Get Data */
-		SELECT p.[ID], p.[Name], p.[Surname], s.[Name] AS [Story]
+		SELECT p.[ID], p.[Name], p.[Surname], s.[ID] AS [StoryID], s.[Name] AS [StoryName]
 		FROM [Player].[Player] p
 		JOIN [Player].[Story] s on (s.ID = p.Story)
 		WHERE p.ID = @ID;

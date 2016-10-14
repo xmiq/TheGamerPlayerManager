@@ -23,7 +23,7 @@ namespace Manager.DataManagement
                     ID = Convert.ToInt32(x["ID"]),
                     Name = x["Name"].ToString(),
                     Surname = x["Surname"].ToString(),
-                    Story = x["Story"].ToString()
+                    Story = new Story { ID = Convert.ToInt32(x["StoryID"]), Name = x["StoryName"].ToString() }
                 })
                 .ToList();
         }
@@ -40,7 +40,7 @@ namespace Manager.DataManagement
                     ID = Convert.ToInt32(x["ID"]),
                     Name = x["Name"].ToString(),
                     Surname = x["Surname"].ToString(),
-                    Story = x["Story"].ToString()
+                    Story = new Story { ID = Convert.ToInt32(x["StoryID"]), Name = x["StoryName"].ToString() }
                 })
                 .FirstOrDefault();
         }
