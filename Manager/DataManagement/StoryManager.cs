@@ -84,13 +84,13 @@ namespace Manager.DataManagement
             mgr.Execute("Player.usp_UpdateStory", id, name, user);
         }
 
-        public void DeleteSkill(int ID)
+        public void DeleteStory(int ID)
         {
             var id = mgr.GetParameter();
             id.ParameterName = "@ID";
             id.Value = ID;
 
-            mgr.Execute("Player.usp_DeleteSkill", id);
+            mgr.Execute("Player.usp_DeleteStory", id);
         }
     }
 }
