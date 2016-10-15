@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Manager.Controllers
 {
-    [OwnerOnly]
+    [Authorize]
     public class StoryController : Controller
     {
         private StoryManager mgr = new StoryManager();
@@ -20,9 +20,18 @@ namespace Manager.Controllers
             return PartialView(mgr.GetAllStories());
         }
 
-        // GET: Story/Details/5
-        public ActionResult Details(int id)
+        // GET: Story
+        [ChildActionOnly]
+        public ActionResult MyIndex(string username)
         {
+            ViewBag.Username = username;
+            return PartialView(mgr.GetAllStories(username));
+        }
+
+        // GET: Story/Details/5
+        public ActionResult Details(int id, string username)
+        {
+            ViewBag.Username = username;
             return View(mgr.GetStory(id));
         }
 

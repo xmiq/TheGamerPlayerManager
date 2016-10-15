@@ -20,7 +20,7 @@ namespace Manager.ManagerAttributes
 
             var rd = httpContext.Request.RequestContext.RouteData;
 
-            string username = (rd.Values.ContainsKey("username")) ? rd.Values["username"].ToString() : rd.Values["id"].ToString();
+            string username = (rd.Values.ContainsKey("username")) ? rd.Values["username"].ToString() : (rd.Values["id"] ?? 0).ToString();
 
             //Sometimes username is not recognized in RouteData
             if (username.All(x => Char.IsNumber(x)))

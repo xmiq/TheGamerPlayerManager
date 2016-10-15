@@ -17,10 +17,10 @@
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("View Players", nameof(Manager.Controllers.PlayerController.Index), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = ViewBag.Username }, null) |
+    @Html.ActionLink("Edit", nameof(Manager.Controllers.StoryController.Edit), new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.AccountController.AccountProfile).Replace("Account", ""), nameof(Manager.Controllers.AccountController).Replace("Controller", ""))
 </p>

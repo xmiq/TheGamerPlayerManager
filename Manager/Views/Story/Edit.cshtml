@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Story</h4>
         <hr />
@@ -33,5 +33,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.AccountController.AccountProfile).Replace("Account", ""), nameof(Manager.Controllers.AccountController).Replace("Controller", ""))
 </div>
