@@ -49,7 +49,7 @@
     {
         @Html.ActionLink("Edit", nameof(Manager.Controllers.PlayerController.Edit), new { id = Model.ID, username = ViewBag.Username }) <span> |</span>
     }
-    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Index), new { id = ViewBag.Username })
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Index), new { id = ViewBag.Story, username = ViewBag.Username })
 </p>
 
 <hr />

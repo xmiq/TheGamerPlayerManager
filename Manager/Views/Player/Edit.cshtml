@@ -1,7 +1,7 @@
 ﻿@model Manager.Models.Player
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Player";
 }
 
 <h2>Edit</h2>
@@ -50,7 +50,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Index), new { id = ViewBag.Username })
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Index), new { id = ViewBag.Story, username = ViewBag.Username })
 </div>
 
 @section Scripts {

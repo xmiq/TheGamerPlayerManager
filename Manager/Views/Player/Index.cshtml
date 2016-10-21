@@ -9,7 +9,7 @@
 @if (ViewBag.IsOwner)
 {
     <p>
-        @Html.ActionLink("Create New", nameof(Manager.Controllers.PlayerController.Create), new { id = ViewBag.Username })
+        @Html.ActionLink("Create New", nameof(Manager.Controllers.PlayerController.Create), new { id = ViewBag.Username, story = ViewBag.Story })
     </p>
 }
 <table class="table">
@@ -41,12 +41,12 @@
             <td>
                 @if (ViewBag.IsOwner)
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID, username = ViewBag.Username }) <span> |</span>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID, username = ViewBag.Username, story = ViewBag.Story }) <span> |</span>
                 }
-                @Html.ActionLink("Details", "Details", new { id = item.ID, username = ViewBag.Username })
+                @Html.ActionLink("Details", "Details", new { id = item.ID, username = ViewBag.Username, story = ViewBag.Story })
                 @if (ViewBag.IsOwner)
                 {
-                    <span> |</span> @Html.ActionLink("Delete", "Delete", new { id = item.ID, username = ViewBag.Username })
+                    <span> |</span> @Html.ActionLink("Delete", "Delete", new { id = item.ID, username = ViewBag.Username, story = ViewBag.Story })
                 }
             </td>
         </tr>

@@ -1,7 +1,7 @@
 ﻿@model Manager.Models.Player
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Player";
 }
 
 <h2>Delete</h2>
@@ -43,7 +43,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Index), new { id = ViewBag.Username })
+            @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Index), new { id = ViewBag.Story, username = ViewBag.Username })
         </div>
     }
 </div>

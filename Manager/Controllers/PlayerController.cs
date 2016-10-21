@@ -25,55 +25,59 @@ namespace Manager.Controllers
             return View(mgr.GetAllStoryPlayers(id, username));
         }
 
-        // GET: Player/Details/5?username=MyUser
+        // GET: Player/Details/5?username=MyUser&story=5
         [AllowAnonymous]
-        public ActionResult Details(int id, string username)
+        public ActionResult Details(int id, string username, int story)
         {
+            ViewBag.Story = story;
             ViewBag.Username = username;
             ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? umgr.IsOwner(Token.Value, username) : false;
             return View(mgr.GetPlayer(id));
         }
 
-        // GET: Player/Create/MyUser
+        // GET: Player/Create/MyUser&story=5
         [OwnerOnly]
-        public ActionResult Create(string id)
+        public ActionResult Create(string id, int story)
         {
+            ViewBag.Story = story;
             ViewBag.Username = id;
             return View();
         }
 
-        // POST: Player/Create/MyUser
+        // POST: Player/Create/MyUser&story=5
         [HttpPost, OwnerOnly]
-        public ActionResult Create(string id, Player player)
+        public ActionResult Create(string id, Player player, int story)
         {
             try
             {
                 mgr.CreatePlayer(id, player);
-                return RedirectToAction(nameof(Index), new { id = id });
+                return RedirectToAction(nameof(Index), new { id = story, username = id });
             }
             catch
             {
+                ViewBag.Story = story;
                 ViewBag.Username = id;
                 return View(player);
             }
         }
 
-        // GET: Player/Edit/5?username=MyUser
+        // GET: Player/Edit/5?username=MyUser&story=5
         [OwnerOnly]
-        public ActionResult Edit(int id, string username)
+        public ActionResult Edit(int id, string username, int story)
         {
+            ViewBag.Story = story;
             ViewBag.Username = username;
             return View(mgr.GetPlayer(id));
         }
 
-        // POST: Player/Edit/5?username=MyUser
+        // POST: Player/Edit/5?username=MyUser&story=5
         [HttpPost, OwnerOnly]
-        public ActionResult Edit(int id, Player player, string username)
+        public ActionResult Edit(int id, Player player, string username, int story)
         {
             try
             {
                 mgr.UpdatePlayer(username, player);
-                return RedirectToAction(nameof(Index), new { id = username });
+                return RedirectToAction(nameof(Index), new { id = story, username = username });
             }
             catch
             {
@@ -82,25 +86,27 @@ namespace Manager.Controllers
             }
         }
 
-        // GET: Player/Delete/5?username=MyUser
+        // GET: Player/Delete/5?username=MyUser&story=5
         [OwnerOnly]
-        public ActionResult Delete(int id, string username)
+        public ActionResult Delete(int id, string username, int story)
         {
+            ViewBag.Story = story;
             ViewBag.Username = username;
             return View(mgr.GetPlayer(id));
         }
 
-        // POST: Player/Delete/5?username=MyUser
+        // POST: Player/Delete/5?username=MyUser&story=5
         [HttpPost, OwnerOnly]
-        public ActionResult Delete(int id, Player p, string username)
+        public ActionResult Delete(int id, Player p, string username, int story)
         {
             try
             {
                 mgr.DeletePlayer(p);
-                return RedirectToAction(nameof(Index), new { id = username });
+                return RedirectToAction(nameof(Index), new { id = story, username = username });
             }
             catch
             {
+                ViewBag.Story = story;
                 ViewBag.Username = username;
                 return View(p);
             }
