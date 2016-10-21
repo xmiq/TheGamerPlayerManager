@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Manager.Models.Player>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Model.FirstOrDefault().Story.Name + " Player List";
 }
 
 <h2>Index</h2>
@@ -55,6 +55,6 @@
 @if (ViewBag.IsOwner)
 {
     <p>
-        @Html.ActionLink("Back to Profile", nameof(Manager.Controllers.AccountController.AccountProfile).Replace("Account", ""), nameof(Manager.Controllers.AccountController).Replace("Controller", ""))
+        @Html.ActionLink("Back to Story", nameof(Manager.Controllers.StoryController.Details), nameof(Manager.Controllers.StoryController).Replace("Controller", ""), new { id = ViewBag.Story, username = ViewBag.Username }, null)
     </p>
 }

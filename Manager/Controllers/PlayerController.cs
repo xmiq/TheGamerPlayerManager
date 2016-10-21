@@ -15,13 +15,14 @@ namespace Manager.Controllers
         private PlayerManager mgr = new PlayerManager();
         private UserManager umgr = new UserManager();
 
-        // GET: Player/MyUser
+        // GET: Player/5?username=MyUser
         [AllowAnonymous]
-        public ActionResult Index(string id)
+        public ActionResult Index(int id, string username)
         {
-            ViewBag.Username = id;
-            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? umgr.IsOwner(Token.Value, id) : false;
-            return View(mgr.GetAllPlayers(id));
+            ViewBag.Story = id;
+            ViewBag.Username = username;
+            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? umgr.IsOwner(Token.Value, username) : false;
+            return View(mgr.GetAllStoryPlayers(id, username));
         }
 
         // GET: Player/Details/5?username=MyUser

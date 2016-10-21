@@ -28,6 +28,28 @@ namespace Manager.DataManagement
                 .ToList();
         }
 
+        public List<Player> GetAllStoryPlayers(int storyID, string playerUsername)
+        {
+            var username = mgr.GetParameter();
+            username.ParameterName = "@Username";
+            username.Value = playerUsername;
+            username.DbType = System.Data.DbType.String;
+
+            var story = mgr.GetParameter();
+            story.ParameterName = "@Story";
+            story.Value = storyID;
+
+            return mgr.GetData("Player.usp_GetAllStoryPlayers", username, story)
+                .Select(x => new Player
+                {
+                    ID = Convert.ToInt32(x["ID"]),
+                    Name = x["Name"].ToString(),
+                    Surname = x["Surname"].ToString(),
+                    Story = new Story { ID = Convert.ToInt32(x["StoryID"]), Name = x["StoryName"].ToString() }
+                })
+                .ToList();
+        }
+
         public Player GetPlayer(int ID)
         {
             var playerID = mgr.GetParameter();

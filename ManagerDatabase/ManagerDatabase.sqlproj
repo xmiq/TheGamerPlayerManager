@@ -124,5 +124,6 @@
     <Build Include="Player\Stored Procedures\usp_CreateStory.sql" />
     <Build Include="Player\Stored Procedures\usp_UpdateStory.sql" />
     <Build Include="Player\Stored Procedures\usp_DeleteStory.sql" />
+    <Build Include="Player\Stored Procedures\usp_GetAllStoryPlayers.sql" />
   </ItemGroup>
 </Project>
