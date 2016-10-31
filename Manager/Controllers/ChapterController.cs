@@ -22,27 +22,29 @@ namespace Manager.Controllers
             return PartialView(mgr.Chapter.GetAllChapters(id));
         }
 
-        // GET: Chapter/Create/5?username=MyUser
-        public ActionResult Create(int id, string username)
+        // GET: Chapter/Create/5?username=MyUser&story=5
+        public ActionResult Create(int id, string username, int story)
         {
             ViewBag.ID = id;
             ViewBag.Username = username;
+            ViewBag.Story = story;
             return View(mgr.Chapter.GetNextChapter(id));
         }
 
-        // POST: Chapter/Create
+        // POST: Chapter/Create?username=MyUser&story=5
         [HttpPost]
-        public ActionResult Create(string username, Chapter c)
+        public ActionResult Create(string username, Chapter c, int story)
         {
             try
             {
                 mgr.Chapter.CreateChapter(c);
-                return RedirectToAction(nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = c.Player.ID, username = username });
+                return RedirectToAction(nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = c.Player.ID, username = username, story = story });
             }
             catch
             {
                 ViewBag.ID = c.Player.ID;
                 ViewBag.Username = username;
+                ViewBag.Story = story;
                 return View(c);
             }
         }

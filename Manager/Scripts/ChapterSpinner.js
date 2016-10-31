@@ -63,7 +63,7 @@ $(document).ready(function () {
 
     if (IsOwner) {
         $("#chapter-new").on("click touch", function () {
-            window.location = "/Chapter/Create/" + $("#PlayerID").val() + "?username=" + $("#Username").val();
+            window.location = "/Chapter/Create/" + $("#PlayerID").val() + "?username=" + $("#Username").val() + "&story=" + $("#Story").val();
         });
     }
 });
