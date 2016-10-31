@@ -12,15 +12,14 @@ namespace Manager.Controllers
     [OwnerOnly]
     public class ChapterController : Controller
     {
-        private ChapterManager mgr = new ChapterManager();
-        private UserManager umgr = new UserManager();
+        private DataManagement.Manager mgr = new DataManagement.Manager(ManagerClasses.Chapter | ManagerClasses.User);
 
         // GET: Chapter/5?username=MyUser
         [AllowAnonymous]
         public ActionResult Index(int id, string username)
         {
-            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? umgr.IsOwner(Token.Value, username) : false;
-            return PartialView(mgr.GetAllChapters(id));
+            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? mgr.User.IsOwner(Token.Value, username) : false;
+            return PartialView(mgr.Chapter.GetAllChapters(id));
         }
 
         // GET: Chapter/Create/5?username=MyUser
@@ -28,7 +27,7 @@ namespace Manager.Controllers
         {
             ViewBag.ID = id;
             ViewBag.Username = username;
-            return View(mgr.GetNextChapter(id));
+            return View(mgr.Chapter.GetNextChapter(id));
         }
 
         // POST: Chapter/Create
@@ -37,7 +36,7 @@ namespace Manager.Controllers
         {
             try
             {
-                mgr.CreateChapter(c);
+                mgr.Chapter.CreateChapter(c);
                 return RedirectToAction(nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = c.Player.ID, username = username });
             }
             catch

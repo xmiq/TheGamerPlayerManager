@@ -12,15 +12,14 @@ namespace Manager.Controllers
     [OwnerOnly]
     public class StatsController : Controller
     {
-        private StatsManager mgr = new StatsManager();
-        private UserManager umgr = new UserManager();
+        private DataManagement.Manager mgr = new DataManagement.Manager(ManagerClasses.Stats | ManagerClasses.User);
 
         // GET: Stats/Details/5?username=myUser
         [AllowAnonymous]
         public ActionResult Details(int id, string username)
         {
-            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? umgr.IsOwner(Token.Value, username) : false;
-            return PartialView(mgr.GetStats(id));
+            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? mgr.User.IsOwner(Token.Value, username) : false;
+            return PartialView(mgr.Stats.GetStats(id));
         }
 
         // GET: Stats/Edit/5?player=5&username=myUser
@@ -28,7 +27,7 @@ namespace Manager.Controllers
         {
             ViewBag.Player = player;
             ViewBag.Username = username;
-            return View(mgr.GetStats(id));
+            return View(mgr.Stats.GetStats(id));
         }
 
         // POST: Stats/Edit/5?player=5&username=myUser
@@ -37,7 +36,7 @@ namespace Manager.Controllers
         {
             try
             {
-                mgr.UpdateStats(s);
+                mgr.Stats.UpdateStats(s);
                 return RedirectToAction(nameof(PlayerController.Details), nameof(PlayerController).Replace("Controller", ""), new { id = player, username = username });
             }
             catch
@@ -63,7 +62,7 @@ namespace Manager.Controllers
         {
             try
             {
-                mgr.AddXP(id, XP);
+                mgr.Stats.AddXP(id, XP);
                 return RedirectToAction(nameof(PlayerController.Details), nameof(PlayerController).Replace("Controller", ""), new { id = player, username = username });
             }
             catch
