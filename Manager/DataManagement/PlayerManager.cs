@@ -100,7 +100,7 @@ namespace Manager.DataManagement
 
             var story = mgr.GetParameter();
             story.ParameterName = "@Story";
-            story.Value = p.Story;
+            story.Value = p.Story.ID;
 
             mgr.Execute("Player.usp_UpdatePlayer", id, name, surname, story);
         }
