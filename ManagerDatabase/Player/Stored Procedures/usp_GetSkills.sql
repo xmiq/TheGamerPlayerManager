@@ -35,11 +35,11 @@ BEGIN
 		
 		DECLARE @SQL nvarchar(max) = '';
 
-		SELECT @SQL = CONCAT(@SQL, N'WITH Skill AS (SELECT ID, Level AS [Skill Level], Chapter FROM [Player].[SkillStatus] WHERE SkillID = ' 
+		SELECT @SQL = CONCAT(@SQL, N'WITH Skill AS (SELECT ID, Level AS [Skill Level], Chapter FROM [Player].[SkillStats] WHERE SkillID = ' 
 					+ CAST (ID AS varchar) + '), Stats AS (SELECT ID, Level AS [Character Level], Level - '
-					+ CAST(@OtherCharLevel AS varchar) + ' AS [Level Difference] FROM [Player].[Status] WHERE Chapter = '
+					+ CAST(@OtherCharLevel AS varchar) + ' AS [Level Difference] FROM [Player].[Stats] WHERE Chapter = '
 					+ CAST (@Chapter AS varchar) + ') SELECT '
-					+ CAST(ID AS varchar) + ' AS ID, CEILING(' + [Active Formula] + ') AS [Active Formula] FROM [Player].[Status] s JOIN Stats st ON (s.ID = st.ID), Skill sk;')
+					+ CAST(ID AS varchar) + ' AS ID, CEILING(' + [Active Formula] + ') AS [Active Formula] FROM [Player].[Stats] s JOIN Stats st ON (s.ID = st.ID), Skill sk;')
 		FROM [Player].[Skills];
 
 		INSERT INTO @activeFormula
@@ -48,7 +48,7 @@ BEGIN
 		SET @SQL = '';
 
 		SELECT @SQL = CONCAT(@SQL, N'SELECT '
-					+ CAST(ID AS varchar) + ' AS ID, CEILING(' + [Active Cost Formula] + ') AS [Active Cost Formula] FROM [Player].[SkillStatus] s WHERE SkillID = ' + CAST(ID AS varchar) + ';')
+					+ CAST(ID AS varchar) + ' AS ID, CEILING(' + [Active Cost Formula] + ') AS [Active Cost Formula] FROM [Player].[SkillStats] s WHERE SkillID = ' + CAST(ID AS varchar) + ';')
 		FROM [Player].[Skills];
 
 		INSERT INTO @activeCostFormula
@@ -56,10 +56,10 @@ BEGIN
 
 		SET @SQL = '';
 
-		SELECT @SQL = CONCAT(@SQL, N'WITH Skill AS (SELECT ID, Level AS [Skill Level], Chapter FROM [Player].[SkillStatus] WHERE SkillID = ' 
-					+ CAST (ID AS varchar) + '), Stats AS (SELECT ID, Level AS [Character Level] FROM [Player].[Status] WHERE Chapter = '
+		SELECT @SQL = CONCAT(@SQL, N'WITH Skill AS (SELECT ID, Level AS [Skill Level], Chapter FROM [Player].[SkillStats] WHERE SkillID = ' 
+					+ CAST (ID AS varchar) + '), Stats AS (SELECT ID, Level AS [Character Level] FROM [Player].[Stats] WHERE Chapter = '
 					+ CAST (@Chapter AS varchar) + ') SELECT '
-					+ CAST(ID AS varchar) + ' AS ID, CEILING(' + [Passive Formula] + ') AS [Passive Formula] FROM [Player].[Status] s JOIN Stats st ON (s.ID = st.ID) JOIN Skill sk ON (sk.ID = '
+					+ CAST(ID AS varchar) + ' AS ID, CEILING(' + [Passive Formula] + ') AS [Passive Formula] FROM [Player].[Stats] s JOIN Stats st ON (s.ID = st.ID) JOIN Skill sk ON (sk.ID = '
 					+ CAST(ID AS varchar) + ');')
 		FROM [Player].[Skills];
 

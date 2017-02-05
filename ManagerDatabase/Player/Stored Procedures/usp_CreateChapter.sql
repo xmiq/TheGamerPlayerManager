@@ -54,13 +54,22 @@ BEGIN
 		/* Get Previous Chapter */
 		SELECT TOP 1 @PreviousChapter = ID
 		FROM [Player].[Chapter]
-		WHERE Player = @Player AND Number = @Number - 1
+		WHERE Player = @Player AND Number = @Number - 1;
 
 		/* Insert stats with the values of the previous chapter */
-		INSERT INTO [Player].[Stats] (Chapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck)
-		SELECT @CurrentChapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck
+		INSERT INTO [Player].[Stats] (Chapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck, Player)
+		SELECT @CurrentChapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck, @Player
 		FROM [Player].[Stats]
-		WHERE (Chapter = @PreviousChapter)
+		WHERE (Chapter = @PreviousChapter AND Player = @Player);
+
+		/* Insert skill stats with the values of the previous chapter */
+		INSERT INTO [Player].[SkillStats] (SkillID, [Level], Chapter, Player, [EXP])
+		SELECT SkillID, [Level], @CurrentChapter, Player, [EXP]
+		FROM [Player].[SkillStats]
+		WHERE (Chapter = @PreviousChapter AND Player = @Player);
+
+		/* Return the current ID */
+		SELECT @CurrentChapter AS ChapterID
 
 	END TRY
 	BEGIN CATCH

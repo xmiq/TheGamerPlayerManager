@@ -29,7 +29,7 @@ BEGIN
 
 	BEGIN TRY
 		/* Get Data */
-		SELECT TOP 1 Number + 1 AS Number
+		SELECT TOP 1 ID,  Number + 1 AS Number
 		FROM [Player].[Chapter]
 		WHERE Player = @Player
 		ORDER BY Number DESC

@@ -29,7 +29,7 @@ BEGIN
 
 	BEGIN TRY
 		/* Get Data */
-		SELECT [ID], [Name], [Description], [Type], [Active Description Formula], [Passive Description Formula], [Active Formula], [Active Cost Formula], [Passive Formula]
+		SELECT [ID], [StoryID], [Name], [Description], [Type], [Active Description Formula], [Passive Description Formula], [Active Formula], [Active Cost Formula], [Passive Formula]
 		FROM Player.Skills
 		WHERE ID = @ID;
 	END TRY
