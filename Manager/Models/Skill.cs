@@ -12,6 +12,9 @@ namespace Manager.Models
         public int ID { get; set; }
 
         [Required]
+        public int Story { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         [Required]

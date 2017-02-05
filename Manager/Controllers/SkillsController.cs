@@ -15,21 +15,23 @@ namespace Manager.Controllers
         private SkillManager mgr = new SkillManager();
 
         // GET: Skills
-        public ActionResult Index()
+        public ActionResult Index(int story)
         {
-            return View(mgr.GetAllSkills());
+            ViewBag.Story = story;
+            return View(mgr.GetAllSkills(story));
         }
 
         // GET: Skills/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, int story)
         {
+            ViewBag.Story = story;
             return View(mgr.GetSkill(id));
         }
 
         // GET: Skills/Create
-        public ActionResult Create()
+        public ActionResult Create(int story)
         {
-            return View();
+            return View(new Skill { Story = story });
         }
 
         // POST: Skills/Create
@@ -39,11 +41,11 @@ namespace Manager.Controllers
             try
             {
                 mgr.CreateSkill(s);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { story = s.Story });
             }
             catch
             {
-                return View();
+                return View(s);
             }
         }
 
@@ -60,7 +62,7 @@ namespace Manager.Controllers
             try
             {
                 mgr.UpdateSkill(s);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { story = s.Story });
             }
             catch
             {
@@ -81,7 +83,7 @@ namespace Manager.Controllers
             try
             {
                 mgr.DeleteSkill(id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { story = s.Story });
             }
             catch
             {

@@ -22,7 +22,7 @@
         output.append($("<div></div>").attr("id", "dvSkills").attr("style", "order: 2").html(data));
         if (IsOwner) {
             $("#AddSkillStat").on("touch click", function () {
-                window.location = "/SkillStats/Create/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
+                window.location = "/SkillStats/Create/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val() + "&story=" + $("#Story").val();
             });
             $("#EditSkillStat").on("touch click", function () {
                 var id = $(this).parent().children("input").val();

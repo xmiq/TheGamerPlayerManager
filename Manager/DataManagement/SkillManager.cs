@@ -10,9 +10,13 @@ namespace Manager.DataManagement
     {
         private DataManager mgr = new DataManager();
 
-        public List<Skill> GetAllSkills()
+        public List<Skill> GetAllSkills(int Story)
         {
-            return mgr.GetData("Player.usp_GetAllSkills")
+            var story = mgr.GetParameter();
+            story.ParameterName = "@Story";
+            story.Value = Story;
+
+            return mgr.GetData("Player.usp_GetAllSkills", story)
                 .Select(x => new Skill
                 {
                     ID = Convert.ToInt32(x["ID"]),
@@ -32,6 +36,7 @@ namespace Manager.DataManagement
                 .Select(x => new Skill
                 {
                     ID = Convert.ToInt32(x["ID"]),
+                    Story = Convert.ToInt32(x["StoryID"]),
                     Name = x["Name"].ToString(),
                     Description = x["Description"].ToString(),
                     Type = (SkillType)Convert.ToInt32(x["Type"]),
@@ -46,6 +51,10 @@ namespace Manager.DataManagement
 
         public void CreateSkill(Skill s)
         {
+            var story = mgr.GetParameter();
+            story.ParameterName = "@Story";
+            story.Value = s.Story;
+
             var name = mgr.GetParameter();
             name.ParameterName = "@Name";
             name.Value = s.Name;
@@ -78,7 +87,7 @@ namespace Manager.DataManagement
             passiveFormula.ParameterName = "@PassiveFormula";
             passiveFormula.Value = s.PassiveFormula;
 
-            mgr.Execute("Player.usp_CreateSkill", name, description, type, activeDescriptionFormula, passiveDescriptionFormula, activeFormula, activeCostFormula, passiveFormula);
+            mgr.Execute("Player.usp_CreateSkill", story, name, description, type, activeDescriptionFormula, passiveDescriptionFormula, activeFormula, activeCostFormula, passiveFormula);
         }
 
         public void UpdateSkill(Skill s)

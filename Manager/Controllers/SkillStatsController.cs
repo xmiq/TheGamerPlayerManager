@@ -27,7 +27,7 @@ namespace Manager.Controllers
         {
             ViewBag.Username = username;
             ViewBag.Player = player;
-            ViewBag.Skills = mgr.Skill.GetAllSkills();
+            //ViewBag.Skills = mgr.Skill.GetAllSkills();
             return View(new SkillStats { Chapter = new Chapter { ID = id }, Level = 1, EXP = 0 });
         }
 
@@ -45,7 +45,7 @@ namespace Manager.Controllers
             {
                 ViewBag.Username = username;
                 ViewBag.Player = player;
-                ViewBag.Skills = mgr.Skill.GetAllSkills();
+                //ViewBag.Skills = mgr.Skill.GetAllSkills();
                 return View(ss);
             }
         }

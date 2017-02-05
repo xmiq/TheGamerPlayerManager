@@ -21,6 +21,7 @@
 </div>
 <p>
     @Html.ActionLink("View Players", nameof(Manager.Controllers.PlayerController.Index), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = Model.ID, username = ViewBag.Username }, null) |
+    @Html.ActionLink("Skills", nameof(Manager.Controllers.SkillsController.Index), nameof(Manager.Controllers.SkillsController).Replace("Controller", ""), new { story = Model.ID }, null) |
     @Html.ActionLink("Edit", nameof(Manager.Controllers.StoryController.Edit), new { id = Model.ID }) |
     @Html.ActionLink("Back to List", nameof(Manager.Controllers.AccountController.AccountProfile).Replace("Account", ""), nameof(Manager.Controllers.AccountController).Replace("Controller", ""))
 </p>

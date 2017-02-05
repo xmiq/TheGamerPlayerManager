@@ -14,6 +14,7 @@
         <h4>Skill</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Story)
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -79,7 +80,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", nameof(Manager.Controllers.SkillsController.Index))
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.SkillsController.Index), new { story = Model.Story })
 </div>
 
 @section Scripts {

@@ -29,7 +29,6 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Profile", nameof(Manager.Controllers.AccountController.AccountProfile).Replace("Account", ""), nameof(Manager.Controllers.AccountController).Replace("Controller", ""))</li>
-                        <li>@Html.ActionLink("Skills", nameof(Manager.Controllers.SkillsController.Index), nameof(Manager.Controllers.SkillsController).Replace("Controller", ""))</li>
                         <li>@Html.ActionLink("Logout", nameof(Manager.Controllers.AccountController.Logoff).Replace("Account", ""), nameof(Manager.Controllers.AccountController).Replace("Controller", ""))</li>
                     }
                     else

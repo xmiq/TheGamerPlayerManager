@@ -69,5 +69,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", nameof(Manager.Controllers.SkillsController.Edit), new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", nameof(Manager.Controllers.SkillsController.Index))
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.SkillsController.Index), new { story = ViewBag.Story })
 </p>

@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { story = ViewBag.Story })
 </p>
 <table class="table">
     <tr>
@@ -31,7 +31,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", nameof(Manager.Controllers.SkillsController.Edit), new { id = item.ID }) |
-                @Html.ActionLink("Details", nameof(Manager.Controllers.SkillsController.Details), new { id = item.ID }) |
+                @Html.ActionLink("Details", nameof(Manager.Controllers.SkillsController.Details), new { id = item.ID, story = ViewBag.Story }) |
                 @Html.ActionLink("Delete", nameof(Manager.Controllers.SkillsController.Delete), new { id = item.ID })
             </td>
         </tr>

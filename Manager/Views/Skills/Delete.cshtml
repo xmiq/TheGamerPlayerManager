@@ -71,10 +71,12 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Story)
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", nameof(Manager.Controllers.SkillsController.Index))
+            @Html.ActionLink("Back to List", nameof(Manager.Controllers.SkillsController.Index), new { story = Model.Story })
         </div>
     }
 </div>
