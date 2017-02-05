@@ -34,6 +34,7 @@ namespace Manager.DataManagement
             return mgr.GetData("Player.usp_GetNextChapter", player)
                 .Select(x => new Chapter
                 {
+                    ID = Convert.ToInt32(x["ID"]),
                     Number = Convert.ToInt32(x["Number"])
                 })
                 .FirstOrDefault();
@@ -49,7 +50,7 @@ namespace Manager.DataManagement
             number.ParameterName = "@Number";
             number.Value = c.Number;
 
-            mgr.Execute("Player.usp_CreatePlayer", player, number);
+            c.ID = (int)mgr.Scalar("Player.usp_CreateChapter", player, number);
         }
     }
 }

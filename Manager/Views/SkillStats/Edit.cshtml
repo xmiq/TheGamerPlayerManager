@@ -15,6 +15,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
+        @Html.Hidden("story", (int)ViewBag.Story)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Level, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -41,7 +42,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = ViewBag.Player, Username = ViewBag.Username }, null)
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = ViewBag.Player, Username = ViewBag.Username, story = ViewBag.Story, chapter = Model.Chapter.ID }, null)
 </div>
 
 @section Scripts {

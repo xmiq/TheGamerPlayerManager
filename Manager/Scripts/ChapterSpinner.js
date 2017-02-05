@@ -10,10 +10,10 @@
         output.append($("<div></div>").attr("id", "dvStats").attr("style", "order: 1").html(data));
         if (IsOwner) {
             $("#edit-stats").on("touch click", function () {
-                window.location = "/Stats/Edit/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
+                window.location = "/Stats/Edit/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val() + "&story=" + $("#Story").val();;
             });
             $("#AddXP").on("touch click", function () {
-                window.location = "/Stats/AddXP/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
+                window.location = "/Stats/AddXP/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val() + "&story=" + $("#Story").val();
             });
         }
     });
@@ -24,15 +24,15 @@
             $("#AddSkillStat").on("touch click", function () {
                 window.location = "/SkillStats/Create/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val() + "&story=" + $("#Story").val();
             });
-            $("#EditSkillStat").on("touch click", function () {
+            $("[name='EditSkillStat']").on("touch click", function () {
                 var id = $(this).parent().children("input").val();
-                window.location = "/SkillStats/Edit/" + id + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val() + "&chapter=" + option.val();
+                window.location = "/SkillStats/Edit/" + id + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val() + "&chapter=" + option.val() + "&story=" + $("#Story").val();
             });
-            $("#DeleteSkillStat").on("touch click", function () {
-                window.location = "/SkillStats/Delete/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
+            $("[name='DeleteSkillStat']").on("touch click", function () {
+                window.location = "/SkillStats/Delete/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val() + "&story=" + $("#Story").val();
             });
-            $("#AddSkillXP").on("touch click", function () {
-                window.location = "/SkillStats/AddXP/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val();
+            $("[name='AddSkillXP']").on("touch click", function () {
+                window.location = "/SkillStats/AddXP/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val() + "&story=" + $("#Story").val();
             });
         }
     });

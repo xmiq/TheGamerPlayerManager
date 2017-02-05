@@ -26,11 +26,13 @@ namespace Manager.Controllers
 
         // GET: Player/Details/5?username=MyUser&story=5
         [AllowAnonymous]
-        public ActionResult Details(int id, string username, int story)
+        public ActionResult Details(int id, string username, int story, int? chapter)
         {
             ViewBag.Story = story;
             ViewBag.Username = username;
             ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? mgr.User.IsOwner(Token.Value, username) : false;
+            if (chapter.HasValue)
+                ViewBag.Chapter = chapter.Value;
             return View(mgr.Player.GetPlayer(id));
         }
 

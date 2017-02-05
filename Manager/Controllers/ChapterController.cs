@@ -16,9 +16,11 @@ namespace Manager.Controllers
 
         // GET: Chapter/5?username=MyUser
         [AllowAnonymous]
-        public ActionResult Index(int id, string username)
+        public ActionResult Index(int id, string username, int? chapter)
         {
             ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? mgr.User.IsOwner(Token.Value, username) : false;
+            if (chapter.HasValue)
+                ViewBag.Chapter = chapter.Value;
             return PartialView(mgr.Chapter.GetAllChapters(id));
         }
 
@@ -38,7 +40,7 @@ namespace Manager.Controllers
             try
             {
                 mgr.Chapter.CreateChapter(c);
-                return RedirectToAction(nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = c.Player.ID, username = username, story = story });
+                return RedirectToAction(nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = c.Player.ID, username = username, story = story, chapter = c.ID });
             }
             catch
             {

@@ -33,7 +33,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = ViewBag.ID, username = ViewBag.Username, story = ViewBag.Story }, null)
+    @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = ViewBag.ID, username = ViewBag.Username, story = ViewBag.Story, chapter = Model.ID }, null)
 </div>
 
 @section Scripts {

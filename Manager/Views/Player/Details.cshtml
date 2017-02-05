@@ -55,7 +55,7 @@
 
 <hr />
 
-@Html.Action(nameof(Manager.Controllers.ChapterController.Index), nameof(Manager.Controllers.ChapterController).Replace("Controller", ""), new { id = Model.ID, username = ViewBag.Username })
+@Html.Action(nameof(Manager.Controllers.ChapterController.Index), nameof(Manager.Controllers.ChapterController).Replace("Controller", ""), new { id = Model.ID, username = ViewBag.Username, chapter = ViewBag.Chapter })
 
 <br />
 

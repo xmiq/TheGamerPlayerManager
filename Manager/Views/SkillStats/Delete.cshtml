@@ -63,10 +63,11 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.Hidden("story", (int)ViewBag.Story)
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = ViewBag.Player, Username = ViewBag.Username }, null)
+            @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = ViewBag.Player, Username = ViewBag.Username, story = ViewBag.Story, chapter = Model.Chapter.ID }, null)
         </div>
     }
 </div>

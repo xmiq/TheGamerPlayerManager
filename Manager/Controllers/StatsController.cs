@@ -23,53 +23,57 @@ namespace Manager.Controllers
         }
 
         // GET: Stats/Edit/5?player=5&username=myUser
-        public ActionResult Edit(int id, int player, string username)
+        public ActionResult Edit(int id, int player, string username, int story)
         {
             ViewBag.Player = player;
             ViewBag.Username = username;
+            ViewBag.Story = story;
             return View(mgr.Stats.GetStats(id));
         }
 
         // POST: Stats/Edit/5?player=5&username=myUser
         [HttpPost]
-        public ActionResult Edit(int id, int player, string username, Stats s)
+        public ActionResult Edit(int id, int player, string username, int story, Stats s)
         {
             try
             {
                 mgr.Stats.UpdateStats(s);
-                return RedirectToAction(nameof(PlayerController.Details), nameof(PlayerController).Replace("Controller", ""), new { id = player, username = username });
+                return RedirectToAction(nameof(PlayerController.Details), nameof(PlayerController).Replace("Controller", ""), new { id = player, username = username, story = story, chapter = id });
             }
             catch
             {
                 ViewBag.Player = player;
                 ViewBag.Username = username;
+                ViewBag.Story = story;
                 return View(s);
             }
         }
 
         // GET: Stats/AddXP/5?player=5&username=myUser
-        public ActionResult AddXP(int id, int player, string username)
+        public ActionResult AddXP(int id, int player, string username, int story)
         {
             ViewBag.Player = player;
             ViewBag.Username = username;
             ViewBag.ID = id;
+            ViewBag.Story = story;
             return View(0);
         }
 
         // POST: Stats/AddXP/5?player=5&username=myUser
         [HttpPost]
-        public ActionResult AddXP(int id, int player, string username, int XP)
+        public ActionResult AddXP(int id, int player, string username, int XP, int story)
         {
             try
             {
                 mgr.Stats.AddXP(id, XP);
-                return RedirectToAction(nameof(PlayerController.Details), nameof(PlayerController).Replace("Controller", ""), new { id = player, username = username });
+                return RedirectToAction(nameof(PlayerController.Details), nameof(PlayerController).Replace("Controller", ""), new { id = player, username = username, story = story, chapter = id });
             }
             catch
             {
                 ViewBag.Player = player;
                 ViewBag.Username = username;
                 ViewBag.ID = id;
+                ViewBag.Story = story;
                 return View(XP);
             }
         }
