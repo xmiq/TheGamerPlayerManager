@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using System.Net.Mail;
 
 namespace Manager.DataManagement
 {
@@ -115,7 +116,7 @@ namespace Manager.DataManagement
             email.ParameterName = "@Email";
             email.Value = u.Email;
 
-            mgr.GetData("Login.usp_UpdateUserDetails", token, name, surname, email);
+            mgr.Execute("Login.usp_UpdateUserDetails", token, name, surname, email);
         }
 
         public void ChangePassword(Guid Token, Password CurrentPassword, Password NextPassword)
@@ -132,7 +133,7 @@ namespace Manager.DataManagement
             nextpassword.ParameterName = "@NewPassword";
             nextpassword.Value = NextPassword.Hash;
 
-            mgr.GetData("Login.usp_UpdatePassword", token, currentpassword, nextpassword);
+            mgr.Execute("Login.usp_UpdatePassword", token, currentpassword, nextpassword);
         }
 
         public bool IsOwner(Guid Token, string Username)
@@ -146,6 +147,30 @@ namespace Manager.DataManagement
             username.Value = Username;
 
             return Convert.ToBoolean(mgr.Scalar("Login.usp_IsOwner", token, username));
+        }
+
+        public string ForgotPassword(string Username)
+        {
+            var user = mgr.GetParameter();
+            user.ParameterName = "@user";
+            user.Value = Username;
+
+            var data = mgr.GetData("Login.usp_FrogotPasswordToken", user)
+                .Select(x => new
+                {
+                    ID = x["ID"].ToString(),
+                    Token = x["Token"].ToString(),
+                    Email = x["Email"].ToString()
+                })
+                .FirstOrDefault();
+
+            MailMessage mm = new MailMessage();
+            mm.To.Add(data.Email);
+            mm.Subject = "Forgot Password";
+            mm.IsBodyHtml = true;
+            mm.Body = $"<html><head><title>Password Reset</title></head><body><p><a href='/Account/ForgotPassword/{data.ID}?Token={data.Token}'>Reset Password</a></p></body></html>";
+
+            return data.Email;
         }
     }
 

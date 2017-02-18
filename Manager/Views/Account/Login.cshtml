@@ -31,6 +31,11 @@
             <td><input type="submit" value="Login" class="btn btn-default" /></td>
             <td><input type="reset" value="Reset" class="btn btn-default" /></td>
         </tr>
+        <tr>
+            <td colspan="2">
+                <a href='@Url.Action(nameof(Manager.Controllers.AccountController.ForgotPassword))'>Forgot Password</a>
+            </td>
+        </tr>
     </table>
     if (ViewBag.Error != null)
     {

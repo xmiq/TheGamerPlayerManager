@@ -147,5 +147,23 @@ namespace Manager.Controllers
                 return View();
             }
         }
+
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost, AllowAnonymous]
+        public ActionResult ForgotPassword(string username)
+        {
+            mgr.ForgotPassword(username);
+            return View();
+        }
+
+        public ActionResult ForgotPassword(int ID, Guid Token)
+        {
+            return View();
+        }
     }
 }

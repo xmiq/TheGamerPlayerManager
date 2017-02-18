@@ -259,6 +259,7 @@
     <Content Include="Views\Story\Edit.cshtml" />
     <Content Include="Views\Story\Delete.cshtml" />
     <Content Include="Views\Story\MyIndex.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

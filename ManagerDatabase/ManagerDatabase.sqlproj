@@ -68,6 +68,7 @@
     <Folder Include="Security\" />
     <Folder Include="Player\Sequences\" />
     <Folder Include="Login\Stored Procedures\" />
+    <Folder Include="Login\Sequences\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="PlayerDomain\Tables\SkillType.sql" />
@@ -125,5 +126,8 @@
     <Build Include="Player\Stored Procedures\usp_UpdateStory.sql" />
     <Build Include="Player\Stored Procedures\usp_DeleteStory.sql" />
     <Build Include="Player\Stored Procedures\usp_GetAllStoryPlayers.sql" />
+    <Build Include="Login\Tables\ForgotPasswordToken.sql" />
+    <Build Include="Login\Stored Procedures\usp_FrogotPasswordToken.sql" />
+    <Build Include="Login\Sequences\SeqForgotPasswordToken.sql" />
   </ItemGroup>
 </Project>
