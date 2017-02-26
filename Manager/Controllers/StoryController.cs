@@ -29,9 +29,11 @@ namespace Manager.Controllers
         }
 
         // GET: Story/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id, string username)
         {
             ViewBag.Username = username;
+            ViewBag.Owner = (Token.Value != Guid.Empty) ? mgr.User.IsOwner(Token.Value, mgr.User.GetUser(Token.Value).Username) : false;
             return View(mgr.Story.GetStory(id));
         }
 

@@ -20,7 +20,7 @@ namespace Manager.Controllers
         {
             ViewBag.Story = id;
             ViewBag.Username = username;
-            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? mgr.User.IsOwner(Token.Value, username) : false;
+            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? mgr.User.IsOwner(Token.Value, mgr.User.GetUser(Token.Value).Username) : false;
             return View(mgr.Player.GetAllStoryPlayers(id, username));
         }
 
@@ -30,7 +30,7 @@ namespace Manager.Controllers
         {
             ViewBag.Story = story;
             ViewBag.Username = username;
-            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? mgr.User.IsOwner(Token.Value, username) : false;
+            ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? mgr.User.IsOwner(Token.Value, mgr.User.GetUser(Token.Value).Username) : false;
             if (chapter.HasValue)
                 ViewBag.Chapter = chapter.Value;
             return View(mgr.Player.GetPlayer(id));

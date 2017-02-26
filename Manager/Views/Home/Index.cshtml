@@ -3,29 +3,27 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>The Gamer Player Manager</h1>
+    <p class="lead">In order to avoid the clutter and chasing after papers and spreadsheets while managing an rpg / the gamer based character, the GPM was born! If you are a content creator and are looking for some means to manage your characters, join on up and set your stories exactly how like! This site features automatic (advanced) formula calculation, and chapter based character management. Readers, just choose the story you want to learn about and read away.</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <h2>Random Stories</h2>
+        @foreach (Manager.Models.Story s in ViewBag.Stories)
+        {
+            <p><i class="fa fa-file-text-o" aria-hidden="true"></i> <a href="@(Url.Action(nameof(Manager.Controllers.StoryController.Details), nameof(Manager.Controllers.StoryController).Replace("Controller", ""), new { id = s.ID, username = s.User.Username }))">@(s.Name)</a></p>
+        }
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Random Players</h2>
+        @foreach (Manager.Models.Player p in ViewBag.Players)
+        {
+            <p><i class="fa fa-user" aria-hidden="true"></i> <a href="@(Url.Action(nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = p.ID, username = p.Story.User.Username, story = p.Story.ID }))">@(p.Name) @(p.Surname) </a><i class="fa fa-file-text-o" aria-hidden="true"></i> <a href="@(Url.Action(nameof(Manager.Controllers.StoryController.Details), nameof(Manager.Controllers.StoryController).Replace("Controller", ""), new { id = p.Story.ID, username = p.Story.User.Username }))">@(p.Story.Name)</a></p>
+        }
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Search</h2>
+        <p><i class="fa fa-info-circle text-info" aria-hidden="true"></i> Search coming soon.</p>
     </div>
 </div>
