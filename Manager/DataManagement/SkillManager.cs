@@ -51,6 +51,13 @@ namespace Manager.DataManagement
 
         public void CreateSkill(Skill s)
         {
+            if (s.ActiveFormula == null || (s.ActiveFormula == null && s.PassiveFormula == null))
+                s.Type = SkillType.Passive;
+            else if (s.PassiveFormula == null)
+                s.Type = SkillType.Active;
+            else
+                s.Type = SkillType.Active | SkillType.Passive;
+
             var story = mgr.GetParameter();
             story.ParameterName = "@Story";
             story.Value = s.Story;
@@ -65,7 +72,7 @@ namespace Manager.DataManagement
 
             var type = mgr.GetParameter();
             type.ParameterName = "@Type";
-            type.Value = (s.ActiveDescriptionFormula != null && s.PassiveDescriptionFormula == null) ? SkillType.Active : (s.ActiveDescriptionFormula == null && s.PassiveDescriptionFormula != null) ? SkillType.Passive : SkillType.Active | SkillType.Passive;
+            type.Value = s.Type;
 
             var activeDescriptionFormula = mgr.GetParameter();
             activeDescriptionFormula.ParameterName = "@ActiveDescriptionFormula";

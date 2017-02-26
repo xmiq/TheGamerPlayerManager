@@ -13,7 +13,7 @@ namespace Manager.DataManagement
 #if DEVELOPMENT
         private SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Development"].ConnectionString);
 #else
-        private SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Development"].ConnectionString);
+        private SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Live"].ConnectionString);
 #endif
 
         public IDataParameter GetParameter()

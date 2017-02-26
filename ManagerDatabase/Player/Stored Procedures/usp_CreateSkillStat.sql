@@ -8,7 +8,8 @@ CREATE PROCEDURE [Player].[usp_CreateSkillStat]
 	@SkillID int,
 	@Level int,
 	@Chapter int,
-	@EXP int
+	@Player int,
+	@EXP int = 0
 AS
 BEGIN
 	/* SET NOCOUNT ON added to prevent extra result sets from interfering with SELECT statements. */
@@ -36,7 +37,13 @@ BEGIN
 		THROW 50000, @message, 1;
 	END
 
-	IF @EXP IS NULL OR @EXP = 0
+	IF @Player IS NULL OR @Player = 0
+	BEGIN
+		SET @message = @message + '@Player cannot be empty';
+		THROW 50000, @message, 1;
+	END
+
+	IF @EXP IS NULL
 	BEGIN
 		SET @message = @message + '@EXP cannot be empty';
 		THROW 50000, @message, 1;
@@ -44,22 +51,28 @@ BEGIN
 
 	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Player].[Skills] WHERE ID = @SkillID)
 	BEGIN
-		SET @message = @message + '@SkillID: ' + @SkillID + ' is not a valid skill id for this database';
+		SET @message = @message + '@SkillID: ' + CAST(@SkillID AS varchar) + ' is not a valid skill id for this database';
 		THROW 50000, @message, 1;
 	END
 
 	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Player].[Chapter] WHERE ID = @Chapter)
 	BEGIN
-		SET @message = @message + '@Chapter: ' + @Chapter + ' is not a valid chapter id for this database';
+		SET @message = @message + '@Chapter: ' + CAST(@Chapter AS varchar) + ' is not a valid chapter id for this database';
+		THROW 50000, @message, 1;
+	END
+
+	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM [Player].[Player] WHERE ID = @Player)
+	BEGIN
+		SET @message = @message + '@Player: ' + CAST(@Player AS varchar) + ' is not a valid player id for this database';
 		THROW 50000, @message, 1;
 	END
 
 	BEGIN TRY
 		/* Add Data */
 		INSERT INTO [Player].[SkillStats]
-		([SkillID], [Level], [Chapter], [EXP])
+		([SkillID], [Level], [Chapter], [Player], [EXP])
 		VALUES
-		(@SkillID, @Level, @Chapter, @EXP);
+		(@SkillID, @Level, @Chapter, @Player, @EXP);
 	END TRY
 	BEGIN CATCH
 	  -- Implement Error Catching

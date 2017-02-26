@@ -29,6 +29,8 @@ namespace Manager.Models
 
         public Chapter Chapter { get; set; }
 
+        public Player Player { get; set; }
+
         public int EXP { get; set; }
     }
 }

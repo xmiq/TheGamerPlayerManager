@@ -23,7 +23,7 @@ BEGIN
 
 	IF NOT EXISTS (SELECT 1 AS RelatedRecords FROM Player.Chapter WHERE ID = @Chapter)
 	BEGIN
-		SET @message = @message + '@Chapter: ' + @Chapter + ' is not a valid Chapter for this database';
+		SET @message = @message + '@Chapter: ' + CAST(@Chapter AS varchar) + ' is not a valid Chapter for this database';
 		THROW 50000, @message, 1;
 	END
 

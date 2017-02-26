@@ -57,10 +57,19 @@ BEGIN
 		WHERE Player = @Player AND Number = @Number - 1;
 
 		/* Insert stats with the values of the previous chapter */
-		INSERT INTO [Player].[Stats] (Chapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck, Player)
-		SELECT @CurrentChapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck, @Player
-		FROM [Player].[Stats]
-		WHERE (Chapter = @PreviousChapter AND Player = @Player);
+		IF EXISTS (SELECT 1 AS RelatedRecords FROM [Player].[Stats] WHERE (Chapter = @PreviousChapter AND Player = @Player))
+		BEGIN
+			INSERT INTO [Player].[Stats] (Chapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck, Player)
+			SELECT @CurrentChapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck, @Player
+			FROM [Player].[Stats]
+			WHERE (Chapter = @PreviousChapter AND Player = @Player);
+		END
+		ELSE
+		BEGIN
+			INSERT INTO [Player].[Stats] (Chapter, [Level], [EXP], Age, Strength, Vitality, Constitution, Dexterity, Accuracy, Inteligence, Wisdom, Charisma, Luck, Player)
+			VALUES
+			(@CurrentChapter, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, @Player)
+		END
 
 		/* Insert skill stats with the values of the previous chapter */
 		INSERT INTO [Player].[SkillStats] (SkillID, [Level], Chapter, Player, [EXP])

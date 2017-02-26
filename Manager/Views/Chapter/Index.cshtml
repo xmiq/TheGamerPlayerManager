@@ -15,6 +15,6 @@
                 <option value="@(item.ID)" @((ViewBag.Chapter == item.ID) ? "selected" : "")>@(item.Number)</option>
             }
         </select>
-        <span id="chapter-number">@(Model.FirstOrDefault().Number)</span>
+        <span id="chapter-number">@((Model.Count() > 0) ? Model.FirstOrDefault().Number : 0)</span>
     </div>
 </div>

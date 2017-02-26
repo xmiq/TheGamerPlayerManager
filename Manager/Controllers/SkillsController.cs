@@ -43,8 +43,9 @@ namespace Manager.Controllers
                 mgr.CreateSkill(s);
                 return RedirectToAction(nameof(Index), new { story = s.Story });
             }
-            catch
+            catch (Exception e)
             {
+                ViewBag.Message = e.Message;
                 return View(s);
             }
         }

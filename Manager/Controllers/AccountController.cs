@@ -82,8 +82,9 @@ namespace Manager.Controllers
                     default: return View(u);
                 }
             }
-            catch
+            catch (Exception e)
             {
+                ViewBag.Exception = e;
                 return View(u);
             }
         }

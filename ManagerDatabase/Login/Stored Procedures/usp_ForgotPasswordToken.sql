@@ -3,7 +3,7 @@
 -- Create date: 15 Feburary 2017
 -- Description:	Generates a timed forgot password token
 -- =============================================
-CREATE PROCEDURE [Login].[usp_FrogotPasswordToken]
+CREATE PROCEDURE [Login].[usp_ForgotPasswordToken]
 	@user VARCHAR(20)
 AS
 BEGIN

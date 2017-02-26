@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Manager.Models.Player>
 
 @{
-    ViewBag.Title = Model.FirstOrDefault().Story.Name + " Player List";
+    ViewBag.Title = (Model.Count() > 0) ? Model.FirstOrDefault().Story.Name + " Player List" : "Player List";
 }
 
 <h2>Index</h2>

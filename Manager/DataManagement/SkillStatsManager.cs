@@ -10,17 +10,21 @@ namespace Manager.DataManagement
     {
         private DataManager mgr = new DataManager();
 
-        public List<SkillStats> GetSkillStats(int chapterID, int opponentLevel = 1)
+        public List<SkillStats> GetSkillStats(int chapterID, int playerID, int opponentLevel = 1)
         {
             var chapter = mgr.GetParameter();
             chapter.ParameterName = "@Chapter";
             chapter.Value = chapterID;
 
+            var player = mgr.GetParameter();
+            player.ParameterName = "@Player";
+            player.Value = playerID;
+
             var otherCharLevel = mgr.GetParameter();
             otherCharLevel.ParameterName = "@OtherCharLevel";
             otherCharLevel.Value = opponentLevel;
 
-            return mgr.GetData("Player.usp_GetSkills", chapter, otherCharLevel)
+            return mgr.GetData("Player.usp_GetSkills", chapter, player, otherCharLevel)
                 .Select(x => new SkillStats
                 {
                     ID = Convert.ToInt32(x["ID"]),
@@ -67,11 +71,15 @@ namespace Manager.DataManagement
             chapter.ParameterName = "@Chapter";
             chapter.Value = ss.Chapter.ID;
 
+            var player = mgr.GetParameter();
+            player.ParameterName = "@Player";
+            player.Value = ss.Player.ID;
+
             var exp = mgr.GetParameter();
             exp.ParameterName = "@EXP";
             exp.Value = ss.EXP;
 
-            mgr.Execute("Player.usp_CreateSkillStat", skillID, level, chapter, exp);
+            mgr.Execute("Player.usp_CreateSkillStat", skillID, level, chapter, player, exp);
         }
 
         public void UpdateSkillStat(SkillStats ss)

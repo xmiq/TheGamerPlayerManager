@@ -18,7 +18,7 @@
         }
     });
 
-    $.get("/SkillStats/Index/" + option.val() + "?username=" + $("#Username").val(), function (data) {
+    $.get("/SkillStats/Index/" + option.val() + "?username=" + $("#Username").val() + "&player=" + $("#PlayerID").val(), function (data) {
         output.append($("<div></div>").attr("id", "dvSkills").attr("style", "order: 2").html(data));
         if (IsOwner) {
             $("#AddSkillStat").on("touch click", function () {

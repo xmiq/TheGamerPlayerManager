@@ -48,15 +48,17 @@ namespace Manager.Controllers
         [HttpPost, OwnerOnly]
         public ActionResult Create(string id, Player player, int story)
         {
+            if (player.Story == null)
+                player.Story = new Story { ID = story };
             try
             {
                 mgr.Player.CreatePlayer(id, player);
                 return RedirectToAction(nameof(Index), new { id = story, username = id });
             }
-            catch
+            catch (Exception e)
             {
-                ViewBag.Story = story;
                 ViewBag.Username = id;
+                ViewBag.Exception = e;
                 return View(player);
             }
         }

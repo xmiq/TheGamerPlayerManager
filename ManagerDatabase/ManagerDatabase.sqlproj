@@ -127,7 +127,7 @@
     <Build Include="Player\Stored Procedures\usp_DeleteStory.sql" />
     <Build Include="Player\Stored Procedures\usp_GetAllStoryPlayers.sql" />
     <Build Include="Login\Tables\ForgotPasswordToken.sql" />
-    <Build Include="Login\Stored Procedures\usp_FrogotPasswordToken.sql" />
     <Build Include="Login\Sequences\SeqForgotPasswordToken.sql" />
+    <Build Include="Login\Stored Procedures\usp_ForgotPasswordToken.sql" />
   </ItemGroup>
 </Project>

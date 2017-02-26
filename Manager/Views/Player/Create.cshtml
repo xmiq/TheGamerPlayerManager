@@ -42,6 +42,11 @@
     </div>
 }
 
+@if (ViewBag.Exception != null)
+{
+    <p>@(ViewBag.Exception.Message)</p>
+}
+
 <div>
     @Html.ActionLink("Back to List", nameof(Manager.Controllers.PlayerController.Index), new { id = Model.Story.ID, username = ViewBag.Username })
 </div>

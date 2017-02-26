@@ -25,7 +25,7 @@ namespace Manager.ManagerAttributes
             //Sometimes username is not recognized in RouteData
             if (username.All(x => Char.IsNumber(x)))
             {
-                username = httpContext.Request.Params["username"].ToString();
+                username = httpContext.Request.Params["username"].ToString().Split(',').FirstOrDefault();
             }
 
             UserManager mgr = new UserManager();

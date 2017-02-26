@@ -16,36 +16,36 @@ namespace Manager.Controllers
 
         // GET: Skills/5?username=myUser
         [AllowAnonymous]
-        public ActionResult Index(int id, string username)
+        public ActionResult Index(int id, int player, string username)
         {
             ViewBag.IsOwner = (User.Identity.IsAuthenticated) ? mgr.User.IsOwner(Token.Value, username) : false;
-            return PartialView(mgr.SkillStats.GetSkillStats(id));
+            return PartialView(mgr.SkillStats.GetSkillStats(id, player));
         }
 
         // GET: Skills/Create?username=myUser&player=5
         public ActionResult Create(int id, string username, int player, int story)
         {
             ViewBag.Username = username;
-            ViewBag.Player = player;
             ViewBag.Skills = mgr.Skill.GetAllSkills(story);
             ViewBag.Story = story;
-            return View(new SkillStats { Chapter = new Chapter { ID = id }, Level = 1, EXP = 0 });
+            return View(new SkillStats { Chapter = new Chapter { ID = id }, Player = new Player { ID = player }, Level = 1, EXP = 0 });
         }
 
         // POST: Skills/Create?username=myUser&player=5
         [HttpPost]
-        public ActionResult Create(string username, int player, int story, SkillStats ss)
+        public ActionResult Create(string username, int story, int player, SkillStats ss)
         {
+            if (ss.Player == null)
+                ss.Player = new Player { ID = player };
             try
             {
                 // TODO: Add insert logic here
                 mgr.SkillStats.CreateSkillStat(ss);
-                return RedirectToAction(nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = player, Username = username, story = story, chapter = ss.Chapter.ID });
+                return RedirectToAction(nameof(Manager.Controllers.PlayerController.Details), nameof(Manager.Controllers.PlayerController).Replace("Controller", ""), new { id = ss.Player.ID, Username = username, story = story, chapter = ss.Chapter.ID });
             }
             catch
             {
                 ViewBag.Username = username;
-                ViewBag.Player = player;
                 ViewBag.Skills = mgr.Skill.GetAllSkills(story);
                 return View(ss);
             }

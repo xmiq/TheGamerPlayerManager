@@ -38,7 +38,7 @@ namespace Manager.Controllers
             try
             {
                 mgr.Stats.UpdateStats(s);
-                return RedirectToAction(nameof(PlayerController.Details), nameof(PlayerController).Replace("Controller", ""), new { id = player, username = username, story = story, chapter = id });
+                return RedirectToAction(nameof(PlayerController.Details), nameof(PlayerController).Replace("Controller", ""), new { id = player, username = username, story = story, chapter = s.Chapter.ID });
             }
             catch
             {

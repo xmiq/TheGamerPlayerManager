@@ -12,12 +12,12 @@ namespace Manager.Controllers
     [Authorize]
     public class StoryController : Controller
     {
-        private StoryManager mgr = new StoryManager();
+        private Manager.DataManagement.Manager mgr = new DataManagement.Manager(ManagerClasses.Story | ManagerClasses.User);
 
         // GET: Story
         public ActionResult Index()
         {
-            return PartialView(mgr.GetAllStories());
+            return PartialView(mgr.Story.GetAllStories());
         }
 
         // GET: Story
@@ -25,14 +25,14 @@ namespace Manager.Controllers
         public ActionResult MyIndex(string username)
         {
             ViewBag.Username = username;
-            return PartialView(mgr.GetAllStories(username));
+            return PartialView(mgr.Story.GetAllStories(username));
         }
 
         // GET: Story/Details/5
         public ActionResult Details(int id, string username)
         {
             ViewBag.Username = username;
-            return View(mgr.GetStory(id));
+            return View(mgr.Story.GetStory(id));
         }
 
         // GET: Story/Create
@@ -47,11 +47,13 @@ namespace Manager.Controllers
         {
             try
             {
-                mgr.CreateStory(s);
-                return RedirectToAction("Index");
+                s.User = mgr.User.GetUser(Token.Value);
+                mgr.Story.CreateStory(s);
+                return RedirectToAction(nameof(AccountController.AccountProfile).Replace("Account", ""), nameof(AccountController).Replace("Controller", ""));
             }
-            catch
+            catch (Exception e)
             {
+                ViewBag.Exception = e;
                 return View(s);
             }
         }
@@ -59,7 +61,7 @@ namespace Manager.Controllers
         // GET: Story/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(mgr.GetStory(id));
+            return View(mgr.Story.GetStory(id));
         }
 
         // POST: Story/Edit/5
@@ -69,8 +71,9 @@ namespace Manager.Controllers
             try
             {
                 s.ID = id;
-                mgr.UpdateStory(s);
-                return RedirectToAction("Index");
+                s.User = mgr.User.GetUser(Token.Value);
+                mgr.Story.UpdateStory(s);
+                return RedirectToAction(nameof(AccountController.AccountProfile).Replace("Account", ""), nameof(AccountController).Replace("Controller", ""));
             }
             catch
             {
@@ -81,7 +84,7 @@ namespace Manager.Controllers
         // GET: Story/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(mgr.GetStory(id));
+            return View(mgr.Story.GetStory(id));
         }
 
         // POST: Story/Delete/5
@@ -90,8 +93,8 @@ namespace Manager.Controllers
         {
             try
             {
-                mgr.DeleteStory(s.ID);
-                return RedirectToAction("Index");
+                mgr.Story.DeleteStory(s.ID);
+                return RedirectToAction(nameof(AccountController.AccountProfile).Replace("Account", ""), nameof(AccountController).Replace("Controller", ""));
             }
             catch
             {

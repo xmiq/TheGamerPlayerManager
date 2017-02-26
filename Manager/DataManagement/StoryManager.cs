@@ -62,9 +62,9 @@ namespace Manager.DataManagement
 
             var user = mgr.GetParameter();
             user.ParameterName = "@User";
-            user.Value = s.User;
+            user.Value = s.User.Username;
 
-            mgr.Execute("Player.usp_CreateSkill", name, user);
+            mgr.Execute("Player.usp_CreateStory", name, user);
         }
 
         public void UpdateStory(Story s)
@@ -79,7 +79,7 @@ namespace Manager.DataManagement
 
             var user = mgr.GetParameter();
             user.ParameterName = "@User";
-            user.Value = s.User;
+            user.Value = s.User.Username;
 
             mgr.Execute("Player.usp_UpdateStory", id, name, user);
         }

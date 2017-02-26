@@ -23,19 +23,19 @@ namespace Manager.Models
         [Required]
         public SkillType Type { get; set; }
 
-        [Required, Display(Name = "Active Description Formula")]
+        [Display(Name = "Active Description Formula")]
         public string ActiveDescriptionFormula { get; set; }
 
-        [Required, Display(Name = "Passive Description Formula")]
+        [Display(Name = "Passive Description Formula")]
         public string PassiveDescriptionFormula { get; set; }
 
-        [Required, Display(Name = "Active Formula")]
+        [Display(Name = "Active Formula")]
         public string ActiveFormula { get; set; }
 
-        [Required, Display(Name = "Active Cost Formula")]
+        [Display(Name = "Active Cost Formula")]
         public string ActiveCostFormula { get; set; }
 
-        [Required, Display(Name = "Passive Formula")]
+        [Display(Name = "Passive Formula")]
         public string PassiveFormula { get; set; }
     }
 }

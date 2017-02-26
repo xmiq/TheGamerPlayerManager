@@ -79,6 +79,11 @@
     </div>
 }
 
+@if (ViewBag.Message != null)
+{
+    <p>@(ViewBag.Message)</p>
+}
+
 <div>
     @Html.ActionLink("Back to List", nameof(Manager.Controllers.SkillsController.Index), new { story = Model.Story })
 </div>

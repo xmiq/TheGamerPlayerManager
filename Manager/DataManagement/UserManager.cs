@@ -155,7 +155,7 @@ namespace Manager.DataManagement
             user.ParameterName = "@user";
             user.Value = Username;
 
-            var data = mgr.GetData("Login.usp_FrogotPasswordToken", user)
+            var data = mgr.GetData("Login.usp_ForgotPasswordToken", user)
                 .Select(x => new
                 {
                     ID = x["ID"].ToString(),
